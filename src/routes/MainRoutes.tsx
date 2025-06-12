@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-// project-imports
+/** Components **/
 import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 import PagesLayout from 'layout/Pages';
