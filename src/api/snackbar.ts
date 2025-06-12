@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
-
-// third-party
 import useSWR, { mutate } from 'swr';
 
-// types
+/** Types **/
 import { SnackbarProps } from 'types/snackbar';
 
 // ==============================|| API - SNACKBAR ||============================== //

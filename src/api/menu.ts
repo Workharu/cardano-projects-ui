@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 // third-party
 import useSWR, { mutate } from 'swr';
 
-// types
+/** Types **/
 import { MenuProps } from 'types/menu';
 
 const initialState: MenuProps = {

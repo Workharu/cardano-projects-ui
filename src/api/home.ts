@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
 import useSWR from 'swr';
+import { useMemo } from 'react';
 
-// icons
+/** Icons **/
 import { Bookmark2, Money, ProfileDelete, RefreshCircle } from 'iconsax-react';
 
+/** Utility **/
 import { fetcher } from 'utils/axios';
+
+/** Types **/
 import { HomeCardData } from 'types/home';
 
 // Define icon and color mapping
@@ -31,7 +34,7 @@ const iconMap: Record<string, any> = {
   }
 };
 
-// API endpoint
+/** API endpoint **/
 const endpoints = {
   key: 'home/data'
 };
