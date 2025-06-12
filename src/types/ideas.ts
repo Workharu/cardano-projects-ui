@@ -1,3 +1,31 @@
+export interface IdeasData {
+  id: string;
+  name: string;
+  created_at: Date;
+  updated_at: Date;
+  total: number;
+  link: string;
+}
+
+export interface IdeasCardData {
+  id: string | number;
+  title: string;
+  idea_number: number;
+  description: string;
+  kudo_count: number;
+  submitter_name: string;
+  created_at: string;
+  link: string;
+  campaign: {
+    id: number;
+    name: string;
+  };
+  fund: {
+    id: number;
+    name: string;
+  };
+}
+
 export interface IdeaData {
   id: string | number;
   campaign_id: number;

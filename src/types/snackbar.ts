@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { AlertProps } from '@mui/material/Alert';
 import { SnackbarOrigin } from '@mui/material/Snackbar';
 

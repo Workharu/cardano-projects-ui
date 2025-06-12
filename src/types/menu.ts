@@ -1,7 +1,7 @@
-// material-ui
+/** MUI **/
 import { ChipProps } from '@mui/material/Chip';
 
-// project-imports
+/** Components **/
 import { GenericCardProps } from './root';
 import { NavActionType } from 'config';
 

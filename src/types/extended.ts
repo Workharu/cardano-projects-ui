@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 import { ButtonProps } from '@mui/material/Button';
 import { ChipProps } from '@mui/material/Chip';
