@@ -1,9 +1,15 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 
 // ==============================|| CUSTOM FUNCTION - COLOR SHADOWS ||============================== //
 
-export default function getShadow(theme: Theme, shadow: string) {
+/**
+ * Get shadow based on the provided shadow prop
+ * @param theme - MUI theme object
+ * @param shadow - Shadow prop to determine which shadow to return
+ * @returns Corresponding shadow from the theme's custom shadows
+ */
+export default function getShadow(theme: Theme, shadow: string): string {
   switch (shadow) {
     case 'secondary':
       return theme.customShadows.secondary;
