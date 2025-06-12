@@ -1,14 +1,14 @@
 import { forwardRef, ReactNode, Ref } from 'react';
 
-// material-ui
+/** MUI **/
 import { alpha, styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps } from '@mui/material/IconButton';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 import getShadow from 'utils/getShadow';
 
-// types
+/** Types **/
 import { ButtonVariantProps, ExtendedStyleProps, IconButtonShapeProps } from 'types/extended';
 
 // ==============================|| ICON BUTTON - COLOR STYLE ||============================== //

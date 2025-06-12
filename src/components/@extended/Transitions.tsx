@@ -1,6 +1,6 @@
 import { forwardRef, ExoticComponent, ReactElement, Ref } from 'react';
 
-// material-ui
+/** MUI **/
 import Collapse from '@mui/material/Collapse';
 import Fade from '@mui/material/Fade';
 import Grow from '@mui/material/Grow';

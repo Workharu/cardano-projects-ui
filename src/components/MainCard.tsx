@@ -1,16 +1,16 @@
 import { forwardRef, CSSProperties, ReactNode, ReactElement } from 'react';
 
-// material-ui
+/** MUI **/
 import Card, { CardProps } from '@mui/material/Card';
 import CardContent, { CardContentProps } from '@mui/material/CardContent';
 import CardHeader, { CardHeaderProps } from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import useConfig from 'hooks/useConfig';
 
-// types
+/** Types **/
 import { KeyedObject } from 'types/root';
 
 // header style

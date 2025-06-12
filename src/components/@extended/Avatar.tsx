@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 
-// material-ui
+/** MUI **/
 import { alpha, styled } from '@mui/material/styles';
 import MuiAvatar, { AvatarProps } from '@mui/material/Avatar';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
-// types
+/** Types **/
 import { AvatarTypeProps, ColorProps, ExtendedStyleProps, SizeProps } from 'types/extended';
 
 // ==============================|| AVATAR - COLOR STYLE ||============================== //

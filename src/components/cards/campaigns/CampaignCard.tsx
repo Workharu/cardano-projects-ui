@@ -1,9 +1,9 @@
-// material-ui
+/** MUI **/
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import MainCard from 'components/MainCard';
 
 // HTML sanitization

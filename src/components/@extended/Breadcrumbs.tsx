@@ -1,14 +1,14 @@
 import { CSSProperties, ReactElement, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import { useTheme } from '@mui/material/styles';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import MainCard from 'components/MainCard';
 import navigation from 'menu-items';
 
@@ -17,7 +17,7 @@ import navigation from 'menu-items';
 // assets
 import { ArrowRight2, Buildings2, Home3 } from 'iconsax-react';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 import { OverrideIcon } from 'types/root';
 

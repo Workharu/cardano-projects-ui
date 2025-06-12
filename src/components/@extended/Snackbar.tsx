@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react';
 
-// material-ui
+/** MUI **/
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Fade from '@mui/material/Fade';
@@ -8,14 +8,14 @@ import Grow from '@mui/material/Grow';
 import Slide, { SlideProps } from '@mui/material/Slide';
 import MuiSnackbar from '@mui/material/Snackbar';
 
-// project-imports
+/** Components **/
 import IconButton from './IconButton';
 import { closeSnackbar, useGetSnackbar } from 'api/snackbar';
 
-// types
+/** Types **/
 import { KeyedObject } from 'types/root';
 
-// assets
+/** Icons **/
 import { Add } from 'iconsax-react';
 
 // animation function

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-// material-ui
+/** MUI **/
 import { alpha, styled, Theme } from '@mui/material/styles';
 import { MUIStyledCommonProps } from '@mui/system';
 import Box from '@mui/material/Box';

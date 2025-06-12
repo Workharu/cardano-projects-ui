@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { To } from 'history';
 
-// material-ui
+/** MUI **/
 import ButtonBase from '@mui/material/ButtonBase';
 import { SxProps } from '@mui/system';
 
-// project-imports
+/** Components **/
 import Logo from './LogoMain';
 import LogoIcon from './LogoIcon';
 import { APP_DEFAULT_PATH } from 'config';

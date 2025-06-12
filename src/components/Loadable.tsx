@@ -1,6 +1,6 @@
 import { ElementType, Suspense } from 'react';
 
-// project-imports
+/** Components **/
 import Loader from './Loader';
 
 // ==============================|| LOADABLE - LAZY LOADING ||============================== //

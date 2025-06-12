@@ -1,14 +1,14 @@
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import { Link } from 'react-router';
 
-// types
+/** Types **/
 import { SizeProps } from 'types/extended';
 import { GenericCardProps } from 'types/root';
 

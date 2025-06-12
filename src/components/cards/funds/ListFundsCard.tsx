@@ -1,12 +1,12 @@
 // necessary imports
 import { Link } from 'react-router';
 
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import MainCard from 'components/MainCard';
 
 interface Props {

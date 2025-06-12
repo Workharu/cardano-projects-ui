@@ -1,11 +1,11 @@
-// material-ui
+/** MUI **/
 import { CSSObject, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
-// types
+/** Types **/
 import { ColorProps } from 'types/extended';
 
 interface Props {
