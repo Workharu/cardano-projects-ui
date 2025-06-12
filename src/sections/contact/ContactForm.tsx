@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid2';
