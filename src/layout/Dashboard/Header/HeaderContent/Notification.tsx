@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Badge from '@mui/material/Badge';
 import CardContent from '@mui/material/CardContent';
@@ -17,17 +17,17 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Avatar from 'components/@extended/Avatar';
 import IconButton from 'components/@extended/IconButton';
 import Transitions from 'components/@extended/Transitions';
 import MainCard from 'components/MainCard';
 import SimpleBar from 'components/third-party/SimpleBar';
 
-// assets
+/** Icons **/
 import { Gift, MessageText1, Notification, Setting2 } from 'iconsax-react';
 
-// types
+/** Types **/
 
 const actionSX = {
   mt: '6px',

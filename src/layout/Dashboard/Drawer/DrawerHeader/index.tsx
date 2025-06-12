@@ -1,7 +1,7 @@
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-// project-imports
+/** Components **/
 import DrawerHeaderStyled from './DrawerHeaderStyled';
 
 import Logo from 'components/logo';

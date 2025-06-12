@@ -1,12 +1,12 @@
 import { ReactNode, useMemo } from 'react';
 
-// material-ui
+/** MUI **/
 import { alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AppBar, { AppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
-// project-imports
+/** Components **/
 import AppBarStyled from './AppBarStyled';
 import HeaderContent from './HeaderContent';
 import IconButton from 'components/@extended/IconButton';

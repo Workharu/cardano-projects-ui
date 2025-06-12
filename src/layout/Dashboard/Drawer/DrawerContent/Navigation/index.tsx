@@ -1,12 +1,12 @@
 import { Fragment, useState } from 'react';
 
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import NavGroup from './NavGroup';
 import NavItem from './NavItem';
 import { useGetMenuMaster } from 'api/menu';
@@ -14,7 +14,7 @@ import { MenuOrientation, HORIZONTAL_MAX_ITEM } from 'config';
 import useConfig from 'hooks/useConfig';
 import menuItems from 'menu-items';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
 // ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //

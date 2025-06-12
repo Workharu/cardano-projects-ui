@@ -1,8 +1,8 @@
-// material-ui
+/** MUI **/
 import { styled, Theme, CSSObject } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 
-// project-imports
+/** Components **/
 import { DRAWER_WIDTH, MINI_DRAWER_WIDTH } from 'config';
 
 const openedMixin = (theme: Theme) =>

@@ -1,7 +1,7 @@
 import { useState, cloneElement, ReactElement } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import { alpha, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
@@ -19,7 +19,7 @@ import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import AnimateButton from 'components/@extended/AnimateButton';
 import IconButton from 'components/@extended/IconButton';
 import { handlerComponentDrawer, useGetMenuMaster } from 'api/menu';

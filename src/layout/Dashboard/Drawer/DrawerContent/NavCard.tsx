@@ -1,11 +1,11 @@
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import AnimateButton from 'components/@extended/AnimateButton';
 import MainCard from 'components/MainCard';
 
@@ -26,7 +26,7 @@ export default function NavCard() {
           </Typography> */}
         </Stack>
         <AnimateButton>
-          <Button variant="shadow" size="small" component={Link} href="https://workharu.authordesk.app/" target="_blank">
+          <Button variant="shadow" size="small" component={Link} href="contact-us" target="_blank">
             Get Support
           </Button>
         </AnimateButton>

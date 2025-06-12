@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid2';
@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 // third-party
 import { motion } from 'framer-motion';
 
-// project-imports
+/** Components **/
 import Logo from 'components/logo';
 
 // assets

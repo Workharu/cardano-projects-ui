@@ -1,7 +1,7 @@
 import { useEffect, useState, Dispatch, Fragment, MouseEvent, SetStateAction } from 'react';
 import { matchPath, useLocation } from 'react-router';
 
-// material-ui
+/** MUI **/
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -15,7 +15,7 @@ import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import NavItem from './NavItem';
 import NavCollapse from './NavCollapse';
 import SimpleBar from 'components/third-party/SimpleBar';
@@ -28,7 +28,7 @@ import useConfig from 'hooks/useConfig';
 // assets
 import { More2 } from 'iconsax-react';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
 interface Props {

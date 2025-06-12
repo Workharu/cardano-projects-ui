@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Drawer from './Drawer';
 import Header from './Header';
 import Footer from './Footer';

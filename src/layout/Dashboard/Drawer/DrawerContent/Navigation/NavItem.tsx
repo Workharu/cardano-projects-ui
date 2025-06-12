@@ -1,6 +1,6 @@
 import { matchPath, useLocation, Link } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Dot from 'components/@extended/Dot';
 import IconButton from 'components/@extended/IconButton';
 
@@ -18,7 +18,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 import { MenuOrientation, NavActionType } from 'config';
 import useConfig from 'hooks/useConfig';
 
-// types
+/** Types **/
 import { LinkTarget, NavItemType } from 'types/menu';
 
 interface Props {

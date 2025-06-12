@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo, Dispatch, MouseEvent, SetStateAction } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Collapse from '@mui/material/Collapse';
@@ -16,7 +16,7 @@ import Popper from '@mui/material/Popper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import NavItem from './NavItem';
 import Dot from 'components/@extended/Dot';
 import IconButton from 'components/@extended/IconButton';
@@ -31,7 +31,7 @@ import useMenuCollapse from 'hooks/useMenuCollapse';
 // assets
 import { ArrowDown2, ArrowUp2, ArrowRight2, Copy } from 'iconsax-react';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
 type VirtualElement = {

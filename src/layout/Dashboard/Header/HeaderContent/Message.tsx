@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// material-ui
+/** MUI **/
 import { useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid2';
@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import MessageCard from 'components/cards/statistics/MessageCard';
 import IconButton from 'components/@extended/IconButton';
 import MainCard from 'components/MainCard';

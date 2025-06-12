@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-// material-ui
+/** MUI **/
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import IconButton from 'components/@extended/IconButton';
 
 // assets

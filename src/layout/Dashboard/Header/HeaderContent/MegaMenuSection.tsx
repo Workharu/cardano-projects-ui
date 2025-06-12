@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -17,7 +17,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Dot from 'components/@extended/Dot';
 import IconButton from 'components/@extended/IconButton';
 import Transitions from 'components/@extended/Transitions';

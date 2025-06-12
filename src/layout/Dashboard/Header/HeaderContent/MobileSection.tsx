@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-// material-ui
+/** MUI **/
 import AppBar from '@mui/material/AppBar';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Paper from '@mui/material/Paper';
@@ -8,7 +8,7 @@ import Popper from '@mui/material/Popper';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Search from './Search';
 import IconButton from 'components/@extended/IconButton';
 import Transitions from 'components/@extended/Transitions';

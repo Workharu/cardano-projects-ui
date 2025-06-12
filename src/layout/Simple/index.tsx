@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-// project-imports
+/** Components **/
 import Loader from 'components/Loader';
 import { SimpleLayoutType } from 'config';
 

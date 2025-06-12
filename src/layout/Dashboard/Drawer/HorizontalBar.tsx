@@ -1,13 +1,13 @@
 import { cloneElement, ReactElement } from 'react';
 
-// material-ui
+/** MUI **/
 import { alpha, useTheme } from '@mui/material/styles';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import Navigation from './DrawerContent/Navigation';
 
 import { HEADER_HEIGHT } from 'config';

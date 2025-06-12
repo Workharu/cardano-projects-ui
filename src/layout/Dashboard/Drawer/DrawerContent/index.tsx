@@ -1,7 +1,7 @@
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-// project-imports
+/** Components **/
 import NavCard from './NavCard';
 import Navigation from './Navigation';
 import { useGetMenuMaster } from 'api/menu';

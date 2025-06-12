@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import FullScreen from './FullScreen';
 import MegaMenuSection from './MegaMenuSection';
 import Message from './Message';
