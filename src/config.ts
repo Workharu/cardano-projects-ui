@@ -1,8 +1,7 @@
-// types
+/** Types **/
 import { DefaultConfigProps } from 'types/config';
 
 // ==============================|| THEME CONSTANT ||============================== //
-
 export const APP_DEFAULT_PATH = '/';
 export const HORIZONTAL_MAX_ITEM = 8;
 export const DRAWER_WIDTH = 280;
@@ -32,7 +31,6 @@ export enum NavActionType {
 }
 
 // ==============================|| THEME CONFIG ||============================== //
-
 const config: DefaultConfigProps = {
   fontFamily: `Inter var`,
   menuOrientation: MenuOrientation.VERTICAL,

@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 
-// styles
+/** Styles **/
 import './index.css';
 
-// project-imports
+/** Components **/
 import App from './App';
 import { ConfigProvider } from 'contexts/ConfigContext';
 import reportWebVitals from './reportWebVitals';
@@ -12,7 +12,6 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
-
 root.render(
   <ConfigProvider>
     <App />
