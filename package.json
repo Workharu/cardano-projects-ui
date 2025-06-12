@@ -1,11 +1,12 @@
 {
-  "name": "ideascale-client",
+  "name": "cardano-projects-ui",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
-    "build-stage": "env-cmd -f .env.qa vite build",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build-stage": "env-cmd -f .env vite build",
+    
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
