@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-// project-imports
+/** Components **/
 import { ConfigContext } from 'contexts/ConfigContext';
 
 // ==============================|| HOOKS - CONFIG  ||============================== //

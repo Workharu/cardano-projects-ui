@@ -1,10 +1,10 @@
 import { createContext, ReactNode } from 'react';
 
-// project-imports
+/** Components **/
 import config, { MenuOrientation, ThemeMode } from 'config';
 import useLocalStorage from 'hooks/useLocalStorage';
 
-// types
+/** Types **/
 import { CustomizationProps, FontFamily, PresetColor } from 'types/config';
 
 // initial state

@@ -1,7 +1,7 @@
 import { useEffect, Dispatch, SetStateAction } from 'react';
 import { matchPath } from 'react-router-dom';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
 // Type alias for setting state
