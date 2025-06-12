@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { useTheme } from '@mui/material/styles';
 
 // ==============================|| GITHUB ICON SVG ||============================== //

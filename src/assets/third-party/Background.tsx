@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import Box from '@mui/material/Box';
 
 // ==============================|| BLUR BACK SVG ||============================== //
