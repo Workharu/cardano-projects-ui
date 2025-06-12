@@ -1,7 +1,7 @@
-// project-imports
+/** Components **/
 import { ThemeMode } from 'config';
 
-// types
+/** Types **/
 import { PaletteThemeProps } from 'types/theme';
 
 // ==============================|| PRESET THEME - THEME6 ||============================== //

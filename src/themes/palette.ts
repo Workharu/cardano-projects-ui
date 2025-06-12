@@ -1,12 +1,12 @@
-// material-ui
+/** MUI **/
 import { alpha, createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
 
-// project-imports
+/** Components **/
 import ThemeOption from './theme';
 import { ThemeMode } from 'config';
 
-// types
+/** Types **/
 import { PresetColor } from 'types/config';
 import { PaletteThemeProps } from 'types/theme';
 

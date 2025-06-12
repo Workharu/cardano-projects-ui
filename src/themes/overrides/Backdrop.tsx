@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { alpha } from '@mui/material/styles';
 
 // ==============================|| OVERRIDES - BACKDROP ||============================== //

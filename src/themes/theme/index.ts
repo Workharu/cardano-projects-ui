@@ -1,4 +1,4 @@
-// project-imports
+/** Components **/
 import Default from './default';
 import Theme1 from './theme1';
 import Theme2 from './theme2';
@@ -10,7 +10,7 @@ import Theme7 from './theme7';
 import Theme8 from './theme8';
 import { ThemeMode } from 'config';
 
-// types
+/** Types **/
 import { PresetColor } from 'types/config';
 import { PaletteThemeProps } from 'types/theme';
 

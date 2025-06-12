@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 
 // ==============================|| OVERRIDES - TOGGLE BUTTON ||============================== //

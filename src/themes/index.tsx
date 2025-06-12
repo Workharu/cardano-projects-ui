@@ -1,11 +1,11 @@
 import { ReactNode, useMemo } from 'react';
 
-// material-ui
+/** MUI **/
 import { createTheme, ThemeOptions, ThemeProvider, Theme, TypographyVariantsOptions } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import StyledEngineProvider from '@mui/material/StyledEngineProvider';
 
-// project-imports
+/** Components **/
 import Palette from './palette';
 import Typography from './typography';
 import CustomShadows from './shadows';
@@ -15,7 +15,7 @@ import { HEADER_HEIGHT, ThemeMode } from 'config';
 import useConfig from 'hooks/useConfig';
 import getWindowScheme from 'utils/getWindowScheme';
 
-// types
+/** Types **/
 import { CustomShadowProps } from 'types/theme';
 
 type ThemeCustomizationProps = {

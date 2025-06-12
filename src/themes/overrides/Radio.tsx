@@ -1,12 +1,12 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 import { CheckboxProps } from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
-// types
+/** Types **/
 import { ExtendedStyleProps } from 'types/extended';
 
 // ==============================|| RADIO - COLORS ||============================== //

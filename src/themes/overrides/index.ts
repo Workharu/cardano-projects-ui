@@ -1,10 +1,10 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 
 // third-party
 import { merge } from 'lodash-es';
 
-// project-imports
+/** Components **/
 import Accordion from './Accordion';
 import AccordionDetails from './AccordionDetails';
 import AccordionSummary from './AccordionSummary';

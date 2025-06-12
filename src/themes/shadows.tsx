@@ -1,10 +1,10 @@
-// material-ui
+/** MUI **/
 import { alpha, Theme } from '@mui/material/styles';
 
-// project-imports
+/** Components **/
 import { ThemeMode } from 'config';
 
-// types
+/** Types **/
 import { CustomShadowProps } from 'types/theme';
 
 // ==============================|| DEFAULT THEME - SHADOWS  ||============================== //

@@ -1,11 +1,11 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 import { PaginationProps } from '@mui/material/Pagination';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
-// types
+/** Types **/
 import { ExtendedStyleProps } from 'types/extended';
 
 interface PaginationStyleProps extends ExtendedStyleProps {

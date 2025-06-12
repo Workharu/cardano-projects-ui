@@ -1,10 +1,10 @@
-// material-ui
+/** MUI **/
 import { alpha, Theme } from '@mui/material/styles';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
-// types
+/** Types **/
 import { ExtendedStyleProps } from 'types/extended';
 
 // ==============================|| ALERT - COLORS ||============================== //

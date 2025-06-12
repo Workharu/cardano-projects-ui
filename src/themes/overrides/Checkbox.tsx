@@ -1,14 +1,14 @@
-// material-ui
+/** MUI **/
 import { Theme } from '@mui/material/styles';
 import { CheckboxProps } from '@mui/material/Checkbox';
 
-// project-imports
+/** Components **/
 import getColors from 'utils/getColors';
 
 // assets
 import { Stop, TickSquare, MinusSquare } from 'iconsax-react';
 
-// types
+/** Types **/
 import { ExtendedStyleProps } from 'types/extended';
 
 // ==============================|| RADIO - COLORS ||============================== //

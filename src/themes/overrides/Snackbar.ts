@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import { alpha, Theme } from '@mui/material/styles';
 
 // ==============================|| OVERRIDES - SNACKBAR ||============================== //
