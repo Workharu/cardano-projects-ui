@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// project-imports
+/** Components **/
 import { APP_DEFAULT_PATH } from 'config';
 
 // ==============================|| ERROR 404 ||============================== //

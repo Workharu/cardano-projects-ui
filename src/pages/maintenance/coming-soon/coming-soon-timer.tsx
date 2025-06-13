@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 // third-party
 import { useTimer } from 'react-timer-hook';
 
-// project-imports
+/** Components **/
 import IconButton from 'components/@extended/IconButton';
 import MainCard from 'components/MainCard';
 

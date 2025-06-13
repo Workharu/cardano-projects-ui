@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 import Container from '@mui/material/Container';
@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import IconButton from 'components/@extended/IconButton';
 
 // assets

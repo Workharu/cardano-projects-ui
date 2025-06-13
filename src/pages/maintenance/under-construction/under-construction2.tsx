@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// material-ui
+/** MUI **/
 import Button from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid2';
@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project-imports
+/** Components **/
 import { APP_DEFAULT_PATH } from 'config';
 
 // assets
