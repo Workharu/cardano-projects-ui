@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 
-// icons
+/** Icons **/
 import { ArrowDown, ArrowUp } from 'iconsax-react';
 
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -12,13 +12,18 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-// project-imports
+/** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
 import ListCamaignsPerFundCard from 'components/cards/funds/ListCamaignsPerFundCard';
+
+/** Skeletons **/
 import SkeletonMetricsCard from 'components/skeletons/SkeletonMetricsCard';
 
+/** Config ***/
 import { APP_DEFAULT_PATH, GRID_COMMON_SPACING } from 'config';
-import { useCampaignsPerFundData } from 'api/campaignsPerFund';
+
+/** APIs **/
+import { useCampaignsPerFundData } from 'api/funds';
 
 export default function FundsDetailPage() {
   const { fundId } = useParams();

@@ -1,4 +1,4 @@
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import { ArrowDown, ArrowUp } from 'iconsax-react';
 
-// project-imports
+/** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
 import ListFundsCard from 'components/cards/funds/ListFundsCard';
 
