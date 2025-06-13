@@ -4,7 +4,7 @@ import { Award, Money, Check } from 'iconsax-react';
 // type
 import { NavItemType } from 'types/menu';
 
-// icons
+/** Icons **/
 const icons = {
   uniquenessMetrics: Award,
   budgetMetrics: Money,

@@ -1,10 +1,10 @@
 // assets
 import { Home, Money, I3DCubeScan, Chart, Award } from 'iconsax-react';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
-// icons
+/** Icons **/
 const icons = {
   home: Home,
   funds: Money,
@@ -36,30 +36,22 @@ const home: NavItemType = {
       target: false,
       icon: icons.funds
     },
-    {
-      id: 'campaigns',
-      title: 'Campaigns',
-      type: 'item',
-      url: '/campaigns',
-      target: false,
-      icon: icons.campaigns
-    },
+    // {
+    //   id: 'campaigns',
+    //   title: 'Campaigns',
+    //   type: 'item',
+    //   url: '/campaigns',
+    //   target: false,
+    //   icon: icons.campaigns
+    // },
     {
       id: 'ideas',
       title: 'Ideas',
       type: 'item',
       url: '/ideas',
       target: false,
-      icon: icons.ideas
-    },
-    {
-      id: 'coming-soon',
-      title: 'Coming Soon',
-      type: 'item',
-      url: '/coming-soon',
-      target: false,
-      icon: icons.comingSoon,
-      disabled: true
+      icon: icons.ideas,
+      // disabled: true
     }
   ]
 };

@@ -1,9 +1,9 @@
-// project-imports
+/** Components **/
 import home from './home';
 import funds from './funds';
 import metrics from './metrics';
 
-// types
+/** Types **/
 import { NavItemType } from 'types/menu';
 
 // ==============================|| MENU ITEMS ||============================== //
