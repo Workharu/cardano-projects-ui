@@ -1,7 +1,7 @@
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 
-// project-imports
+/** Components **/
 import MetricsCard from 'components/cards/home/MetricsCard';
 
 import SkeletonMetricsCard from 'components/skeletons/SkeletonMetricsCard';
