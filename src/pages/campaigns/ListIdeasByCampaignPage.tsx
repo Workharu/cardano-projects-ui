@@ -1,14 +1,23 @@
-import Grid from '@mui/material/Grid2';
-import { Typography, Box, Button, Menu, MenuItem, Pagination, Stack } from '@mui/material';
-import { ArrowDown, ArrowUp } from 'iconsax-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+/** MUI **/
+import Grid from '@mui/material/Grid2';
+import { Typography, Box, Button, Menu, MenuItem, Pagination, Stack } from '@mui/material';
+import { ArrowDown, ArrowUp } from 'iconsax-react';
+
+/** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
 import ListIdeasCard from 'components/cards/ideas/ListIdeasCard';
+
+/** Configuration **/
 import { APP_DEFAULT_PATH, GRID_COMMON_SPACING } from 'config';
-import { useCampaignIdeas } from 'api/campaignIdeas';
+
+/** Skeleton **/
 import SkeletonListIdeasCard from 'components/skeletons/SkeletonListIdeasCard';
+
+/** APIs **/
+import { useCampaignIdeas } from 'api/campaign';
 
 export default function ListIdeasByCampaignPage() {
   const { campaignId } = useParams();
@@ -52,7 +61,7 @@ export default function ListIdeasByCampaignPage() {
   if (isLoading || !fundData || !campaignsData) {
     return (
       <>
-        <Breadcrumbs custom heading="Loading..." links={[]} />
+        <Breadcrumbs custom heading="Ideas" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
           {[...Array(2)].map((_, idx) => (
             <Grid key={idx} size={{ xs: 12 }}>

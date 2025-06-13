@@ -1,13 +1,13 @@
 import { Link, useParams } from 'react-router';
 
-// material-ui
+/** MUI **/
 import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { ArrowRight2 } from 'iconsax-react';
 import Button from '@mui/material/Button';
 
-// project-imports
+/** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
 import SkeletonMetricsCard from 'components/skeletons/SkeletonMetricsCard';
 import CampaignCard from 'components/cards/campaigns/CampaignCard';
@@ -35,7 +35,7 @@ export default function CampaignDetailPage() {
   if (isLoading || !fundData || !campaignsData) {
     return (
       <>
-        <Breadcrumbs custom heading="Loading..." links={[]} />
+        <Breadcrumbs custom heading={campaignsData?.name} links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
           {[...Array(3)].map((_, idx) => (
             <Grid key={idx} size={{ xs: 12, sm: 8, md: 4 }}>
