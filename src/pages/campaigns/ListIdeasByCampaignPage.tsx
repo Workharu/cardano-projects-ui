@@ -100,7 +100,29 @@ export default function ListIdeasByCampaignPage() {
         <Grid size={{ xs: 12 }}>
           <Stack spacing={GRID_COMMON_SPACING}>
             {ideasData.length > 0 ? (
-              ideasData.map((idea) => <ListIdeasCard key={idea.id} idea={idea} />)
+              ideasData.map((idea) => (
+                <ListIdeasCard
+                  key={idea.id}
+                  idea={{
+                    id: idea.id,
+                    title: idea.title,
+                    idea_number: idea.idea_number,
+                    description: idea.description,
+                    kudo_count: idea.kudo_count,
+                    submitter_name: idea.submitter_name,
+                    created_at: idea.created_at,
+                    link: `/ideas/${idea.id}`,
+                    campaign: {
+                      id: idea.campaign_id,
+                      name: idea.campaign_name
+                    },
+                    fund: {
+                      id: idea.fund_no,
+                      name: idea.fund
+                    }
+                  }}
+                />
+              ))
             ) : (
               <Typography>No ideas found for this campaign.</Typography>
             )}
