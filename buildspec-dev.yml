@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       # Copy build output to S3
-      - aws s3 sync dist/ s3://$BUCKET  --delete
+      - aws s3 sync dist/ s3://$BUCKET  --delete --exclude "db/*"
       # Invalidate CloudFront cache
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html" 
 
