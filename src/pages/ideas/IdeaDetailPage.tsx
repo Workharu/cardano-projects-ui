@@ -1,5 +1,7 @@
 import { useParams } from 'react-router';
 import DOMPurify from 'dompurify';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 /** Icons **/
 import { Like1, MessageText1, Profile, Link21, Calendar1, MoneySend, People, TickCircle } from 'iconsax-react';
@@ -78,6 +80,8 @@ const sanitizeHTML = (html: string) => {
 export default function IdeaDetailPage() {
   const { ideaId } = useParams();
   const { fundData, campaignData, ideaData, isLoading } = useIdeaData(ideaId);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // Parse JSON fields
   const coSubmitters = ideaData ? parseJSONField(ideaData.co_submitters) : [];
@@ -132,12 +136,16 @@ export default function IdeaDetailPage() {
 
   return (
     <>
-      <Breadcrumbs custom heading={ideaData.title} links={breadcrumbLinks} />
+      <Breadcrumbs
+        custom
+        heading={isMobile ? ideaData.title.substring(0, 20) + (ideaData.title.length > 20 ? '...' : '') : ideaData.title}
+        links={breadcrumbLinks}
+      />
 
-      <Grid container spacing={3} sx={{ mt: 2 }}>
+      <Grid container spacing={isMobile ? 2 : 3} sx={{ mt: 2 }}>
         {/* Main Content */}
-        <Grid size={{ xs: 12, sm: 8, md: 8 }}>
-          <MainCard border={false} sx={{ p: 3, mb: 3 }}>
+        <Grid size={{ xs: 12, sm: 8 }}>
+          <MainCard border={false} sx={{ p: isMobile ? 2 : 3, mb: 3 }}>
             <Stack direction="row" spacing={2} alignItems="center" mb={3}>
               <Avatar src={ideaData.submitter_avatar} alt={ideaData.submitter_name} sx={{ width: 56, height: 56 }} />
               <Box>
@@ -148,11 +156,11 @@ export default function IdeaDetailPage() {
               </Box>
             </Stack>
 
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom sx={{ fontSize: isMobile ? '1.5rem' : '2.125rem' }}>
               {ideaData.title}
             </Typography>
 
-            <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
+            <Stack direction={isMobile ? 'column' : 'row'} spacing={1} sx={{ mb: 3, gap: 1 }}>
               <Chip icon={<TickCircle size="16px" />} label={`${fundData.name}`} color="primary" variant="outlined" />
               {ideaData.project_duration ? (
                 <Chip icon={<Calendar1 size="16px" />} label={`${ideaData.project_duration} months`} color="secondary" />
@@ -170,7 +178,13 @@ export default function IdeaDetailPage() {
 
             <Box sx={{ mb: 4 }}>
               <SectionHeader variant="h5">Problem Statement</SectionHeader>
-              <div dangerouslySetInnerHTML={sanitizeHTML(ideaData.description)} style={{ lineHeight: 1.6 }} />
+              <div
+                dangerouslySetInnerHTML={sanitizeHTML(ideaData.description)}
+                style={{
+                  lineHeight: 1.6,
+                  fontSize: isMobile ? '0.9rem' : '1rem'
+                }}
+              />
             </Box>
 
             {videoUrl && (
@@ -195,7 +209,13 @@ export default function IdeaDetailPage() {
                 {section.ideaFieldValues?.map((field: any, idx: number) => (
                   <Box key={idx} sx={{ mb: 2 }}>
                     {field.fieldDisplayType === 'TEXTAREA' || field.fieldDisplayType === 'TEXTINPUT' || field.renderFormat === 3 ? (
-                      <div dangerouslySetInnerHTML={sanitizeHTML(field.value || 'Not provided')} style={{ lineHeight: 1.6 }} />
+                      <div
+                        dangerouslySetInnerHTML={sanitizeHTML(field.value || 'Not provided')}
+                        style={{
+                          lineHeight: 1.6,
+                          fontSize: isMobile ? '0.9rem' : '1rem'
+                        }}
+                      />
                     ) : field.fieldDisplayType === 'HYPERLINK' ? (
                       <Button
                         variant="outlined"
@@ -204,6 +224,7 @@ export default function IdeaDetailPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         sx={{ mt: 1 }}
+                        fullWidth={isMobile}
                       >
                         {field.name || field.value || 'View Link'}
                       </Button>
@@ -220,9 +241,9 @@ export default function IdeaDetailPage() {
         </Grid>
 
         {/* Sidebar */}
-        <Grid size={{ xs: 12, sm: 4, md: 4 }}>
-          <MainCard border={false} sx={{ p: 3, mb: 3 }}>
-            <SectionHeader variant="h4">Idea Stats</SectionHeader>
+        <Grid size={{ xs: 12, sm: 4 }}>
+          <MainCard border={false} sx={{ p: isMobile ? 2 : 3, mb: 3 }}>
+            <SectionHeader variant="h5">Idea Stats</SectionHeader>
             <Stack spacing={2}>
               <Stack direction="row" justifyContent="space-between">
                 <Typography variant="body1" color="text.secondary">
@@ -255,8 +276,8 @@ export default function IdeaDetailPage() {
             </Stack>
           </MainCard>
 
-          <MainCard border={false} sx={{ p: 3, mb: 3 }}>
-            <SectionHeader variant="h4">Key Details</SectionHeader>
+          <MainCard border={false} sx={{ p: isMobile ? 2 : 3, mb: 3 }}>
+            <SectionHeader variant="h5">Key Details</SectionHeader>
             <Stack spacing={2}>
               <Stack direction="row" justifyContent="space-between">
                 <Typography variant="body1" color="text.secondary">
@@ -286,8 +307,8 @@ export default function IdeaDetailPage() {
           </MainCard>
 
           {coSubmitters.length > 0 && (
-            <MainCard border={false} sx={{ p: 3, mb: 3 }}>
-              <SectionHeader variant="h4">Team Members</SectionHeader>
+            <MainCard border={false} sx={{ p: isMobile ? 2 : 3, mb: 3 }}>
+              <SectionHeader variant="h5">Team Members</SectionHeader>
               <Stack spacing={2}>
                 {coSubmitters.map((member, index) => (
                   <Stack key={index} direction="row" spacing={2} alignItems="center">
@@ -304,8 +325,8 @@ export default function IdeaDetailPage() {
             </MainCard>
           )}
 
-          <MainCard border={false} sx={{ p: 3 }}>
-            <SectionHeader variant="h4">Links</SectionHeader>
+          <MainCard border={false} sx={{ p: isMobile ? 2 : 3 }}>
+            <SectionHeader variant="h5">Links</SectionHeader>
             <Stack spacing={1}>
               {getFieldValue('CF_305') !== 'Not provided' && (
                 <Button
@@ -314,6 +335,7 @@ export default function IdeaDetailPage() {
                   href={getFieldValue('CF_305')}
                   target="_blank"
                   rel="noopener noreferrer"
+                  fullWidth={isMobile}
                 >
                   Website/Repository
                 </Button>
@@ -325,6 +347,7 @@ export default function IdeaDetailPage() {
                   href={getFieldValue('CF_311').match(/https?:\/\/[^\s]+/)[0]}
                   target="_blank"
                   rel="noopener noreferrer"
+                  fullWidth={isMobile}
                 >
                   GitHub Repository
                 </Button>

@@ -24,7 +24,7 @@ export default function ListIdeasPage() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { ideasData, isLoading, totalIdeas, total_pages } = useIdeasData({
+  const { ideasData, isLoading, error, totalIdeas, total_pages, mutate } = useIdeasData({
     page,
     limit: 10,
     order_by: sortField,
@@ -44,9 +44,9 @@ export default function ListIdeasPage() {
     handleSortMenuClose();
   };
 
-  const breadcrumbLinks = ideasData ? [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Ideas' }] : [];
+  const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Ideas' }];
 
-  if (isLoading || !ideasData) {
+  if (isLoading || (!ideasData && !error)) {
     return (
       <>
         <Breadcrumbs custom heading="Ideas" links={breadcrumbLinks} />
@@ -57,6 +57,25 @@ export default function ListIdeasPage() {
             </Grid>
           ))}
         </Grid>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Breadcrumbs custom heading="Ideas" links={breadcrumbLinks} />
+        <Box textAlign="center" mt={4}>
+          <Typography color="error" variant="h6" gutterBottom>
+            Failed to load ideas.
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            {error?.message || 'Something went wrong. Please try again later.'}
+          </Typography>
+          <Button variant="contained" onClick={() => mutate()}>
+            Retry
+          </Button>
+        </Box>
       </>
     );
   }
@@ -90,7 +109,7 @@ export default function ListIdeasPage() {
             {ideasData.length > 0 ? (
               ideasData.map((idea) => <ListIdeasCard key={idea.id} idea={idea} />)
             ) : (
-              <Typography>No ideas found for this idea.</Typography>
+              <Typography>No ideas found.</Typography>
             )}
           </Stack>
         </Grid>

@@ -41,13 +41,11 @@ export function useIdeasData({ page = 1, limit = 10, order_by = 'id', order_dir 
   });
 
   const memoizedValue: IdeasCardData[] = useMemo(() => {
-    const ideasData = data?.data.items || [];
-
-    if (!Array.isArray(ideasData)) {
+    if (!data?.data || !Array.isArray(data.data.items)) {
       return [];
     }
 
-    return ideasData.map((idea: any) => ({
+    return data.data.items.map((idea: any) => ({
       id: idea.id,
       title: idea.title,
       idea_number: idea.idea_number,
@@ -69,8 +67,8 @@ export function useIdeasData({ page = 1, limit = 10, order_by = 'id', order_dir 
 
   return {
     ideasData: memoizedValue,
-    totalIdeas: data?.data.total_items || 0,
-    total_pages: data?.data.total_pages || 0,
+    totalIdeas: data?.data?.total_items ?? 0,
+    total_pages: data?.data?.total_pages ?? 0,
     isLoading,
     error,
     mutate
