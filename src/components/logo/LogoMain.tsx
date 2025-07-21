@@ -24,7 +24,7 @@ export default function LogoMain() {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       {/* Google Fonts: Advent Pro Thin 100 */}
       <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&display=swap" rel="stylesheet" />
-      
+
       <svg id="Layer_1" x="0px" y="0px" width="80" viewBox="0 0 228 231" enableBackground="new 0 0 228 231">
         <path
           fill="#95BDD1"
