@@ -8,7 +8,8 @@ import { NavItemType } from 'types/menu';
 const icons = {
   uniquenessMetrics: Award,
   budgetMetrics: Money,
-  completenessMetrics: Check
+  socialAndEnvironmentalImpactMetrics: Check
+  // completenessMetrics: Check
 };
 
 // ==============================|| MENU ITEMS - METRICS ||============================== //
@@ -27,6 +28,15 @@ const metrics: NavItemType = {
       target: false
     },
     {
+      id: 'social_and_environmental_impact',
+      title: 'Socio-Environmental Impact',
+      type: 'item',
+      icon: icons.socialAndEnvironmentalImpactMetrics,
+      url: '/metrics/social-and-environmental-impact',
+      target: false,
+      disabled: false
+    },
+    {
       id: 'budget',
       title: 'Budget Friendly',
       type: 'item',
@@ -38,7 +48,7 @@ const metrics: NavItemType = {
       id: 'completeness',
       title: 'Completeness',
       type: 'item',
-      icon: icons.completenessMetrics,
+      icon: icons.uniquenessMetrics, // Reusing icon for now
       url: '/metrics/completeness',
       target: false,
       disabled: true

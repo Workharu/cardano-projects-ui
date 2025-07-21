@@ -9,7 +9,7 @@ const icons = {
   home: Home,
   funds: Money,
   campaigns: Chart,
-  ideas: I3DCubeScan,
+  projects: I3DCubeScan,
   comingSoon: Award
 };
 
@@ -45,12 +45,12 @@ const home: NavItemType = {
     //   icon: icons.campaigns
     // },
     {
-      id: 'ideas',
-      title: 'Ideas',
+      id: 'projects',
+      title: 'Projects',
       type: 'item',
-      url: '/ideas',
+      url: '/projects',
       target: false,
-      icon: icons.ideas,
+      icon: icons.projects
       // disabled: true
     }
   ]
