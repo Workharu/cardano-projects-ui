@@ -1,4 +1,4 @@
-# Ideascale Metrics
+# Cardano Projects
 
 ## 🚀 Getting Started
 
