@@ -24,11 +24,11 @@ const FundsDetailPage = Loadable(lazy(() => import('pages/funds/FundsDetailPage'
 // Campaigns page
 const ListCampaignsPage = Loadable(lazy(() => import('pages/campaigns/ListCampaignsPage')));
 const CampaignDetailPage = Loadable(lazy(() => import('pages/campaigns/CampaignDetailPage')));
-const ListIdeasByCampaignPage = Loadable(lazy(() => import('pages/campaigns/ListIdeasByCampaignPage')));
+const ListProjectsByCampaignPage = Loadable(lazy(() => import('pages/campaigns/ListProjectsByCampaignPage')));
 
-// Ideas page
-const ListIdeasPage = Loadable(lazy(() => import('pages/ideas/ListIdeasPage')));
-const IdeaDetailPage = Loadable(lazy(() => import('pages/ideas/IdeaDetailPage')));
+// Projects page
+const ListProjectsPage = Loadable(lazy(() => import('pages/projects/ListProjectsPage')));
+const ProjectDetailPage = Loadable(lazy(() => import('pages/projects/ProjectDetailPage')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -66,18 +66,18 @@ const MainRoutes = {
           element: <CampaignDetailPage />
         },
         {
-          path: 'campaigns/:campaignId/ideas',
-          element: <ListIdeasByCampaignPage />
+          path: 'campaigns/:campaignId/projects',
+          element: <ListProjectsByCampaignPage />
         },
 
-        // Ideas routes
+        // Projects routes
         {
-          path: 'ideas',
-          element: <ListIdeasPage />
+          path: 'projects',
+          element: <ListProjectsPage />
         },
         {
-          path: 'ideas/:ideaId',
-          element: <IdeaDetailPage />
+          path: 'projects/:projectId',
+          element: <ProjectDetailPage />
         },
 
         // Contact Us page
