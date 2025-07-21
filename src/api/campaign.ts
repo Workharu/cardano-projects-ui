@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import { fetcher } from 'utils/axios';
 
 /** Types **/
-import { IdeaData } from 'types/ideas';
+import { ProjectData } from 'types/projects';
 import { FundsCardData } from 'types/funds';
 import { CampaignData } from 'types/campaign';
 import { SortableFields, SortDirection } from 'types/sort';
@@ -18,7 +18,7 @@ const endpoints = {
   campaign: (campaignId: any) => `${endpoints.base}/${campaignId}`,
   // Multiple campaigns
   campaigns: ({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: UseCampaignParams) =>
-    `campaigns/${campaignId}/ideas?${qs.stringify({
+    `campaigns/${campaignId}/projects?${qs.stringify({
       page,
       limit,
       order_by,
@@ -41,7 +41,7 @@ export function useCampaign(campaignId: any) {
   return {
     fundData: data?.data.fund,
     campaignsData: memoizedValue,
-    totalIdeas: data?.data?.total_ideas || 0,
+    totalProjects: data?.data?.total_projects || 0,
     isLoading,
     error,
     mutate
@@ -56,7 +56,7 @@ interface UseCampaignParams {
   order_dir?: SortDirection;
 }
 
-export function useCampaignIdeas({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: UseCampaignParams) {
+export function useCampaignProjects({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: UseCampaignParams) {
   const key = endpoints.campaigns({ campaignId, page, limit, order_by, order_dir });
 
   const { data, isLoading, error, mutate } = useSWR(key, fetcher, {
@@ -65,15 +65,15 @@ export function useCampaignIdeas({ campaignId, page = 1, limit = 10, order_by = 
     revalidateOnReconnect: false
   });
 
-  const memoizedValue: IdeaData[] = useMemo(() => {
+  const memoizedValue: ProjectData[] = useMemo(() => {
     return data?.data.items ?? [];
   }, [data]);
 
   return {
     fundData: data?.data?.fund,
     campaignsData: data?.data?.campaign,
-    ideasData: memoizedValue,
-    totalIdeas: data?.data?.total_items,
+    projectsData: memoizedValue,
+    totalProjects: data?.data?.total_items,
     page: data?.data?.page || 1,
     limit: data?.data?.limit || 10,
     count: data?.data?.count,
@@ -118,7 +118,7 @@ export function useCampaignsPerFundData(fundId: any, sortField?: string, sortDir
     fundData: data?.data.fund || null,
     campaignsData: memoizedValue,
     totalCampaigns: data?.data?.count || memoizedValue.length,
-    totalIdeas: data?.data?.ideas_count || 0,
+    totalProjects: data?.data?.projects_count || 0,
     isLoading,
     error,
     mutate
