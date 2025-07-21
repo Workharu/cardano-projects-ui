@@ -5,7 +5,7 @@ type Props = {
   variant?: 'card' | 'list';
 };
 
-export default function SkeletonListIdeasCard({ variant = 'list' }: Props) {
+export default function SkeletonListProjectsCard({ variant = 'list' }: Props) {
   return (
     <Card>
       <CardContent>

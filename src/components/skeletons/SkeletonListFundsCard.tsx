@@ -19,7 +19,7 @@ export default function SkeletonListFundsCard({ variant = 'card' }: Props) {
               {/* Updated at date */}
               <Skeleton variant="text" width="70%" height={24} />
 
-              {/* Idea count */}
+              {/* Project count */}
               <Skeleton variant="text" width="40%" height={20} />
             </Stack>
           </Stack>
