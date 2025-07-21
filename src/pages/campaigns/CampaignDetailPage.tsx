@@ -19,7 +19,7 @@ export default function CampaignDetailPage() {
   const { campaignId } = useParams();
 
   // Fetching campaigns data for the specific fund
-  const { fundData, campaignsData, isLoading, totalIdeas } = useCampaign(campaignId);
+  const { fundData, campaignsData, isLoading, totalProjects } = useCampaign(campaignId);
 
   let breadcrumbLinks: { title: string; to?: string }[] = [];
 
@@ -60,11 +60,11 @@ export default function CampaignDetailPage() {
         }}
       >
         <Typography variant="subtitle1">
-          Total Ideas: <strong>{totalIdeas}</strong>
+          Total Projects: <strong>{totalProjects}</strong>
         </Typography>
 
-        <Button component={Link} to={`/campaigns/${campaignId}/ideas`} endIcon={<ArrowRight2 />} variant="contained" color="primary">
-          View All Ideas
+        <Button component={Link} to={`/campaigns/${campaignId}/projects`} endIcon={<ArrowRight2 />} variant="contained" color="primary">
+          View All Projects
         </Button>
       </Box>
 

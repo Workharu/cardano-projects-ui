@@ -8,25 +8,25 @@ import { ArrowDown, ArrowUp } from 'iconsax-react';
 
 /** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
-import ListIdeasCard from 'components/cards/ideas/ListIdeasCard';
+import ListProjectsCard from 'components/cards/projects/ListProjectsCard';
 
 /** Configuration **/
 import { APP_DEFAULT_PATH, GRID_COMMON_SPACING } from 'config';
 
 /** Skeleton **/
-import SkeletonListIdeasCard from 'components/skeletons/SkeletonListIdeasCard';
+import SkeletonListProjectsCard from 'components/skeletons/SkeletonListProjectsCard';
 
 /** APIs **/
-import { useCampaignIdeas } from 'api/campaign';
+import { useCampaignProjects } from 'api/campaign';
 
-export default function ListIdeasByCampaignPage() {
+export default function ListProjectsByCampaignPage() {
   const { campaignId } = useParams();
   const [page, setPage] = useState(1);
   const [sortField, setSortField] = useState<'id' | 'title' | 'created_at'>('id');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { fundData, campaignsData, ideasData, isLoading, totalIdeas, total_pages } = useCampaignIdeas({
+  const { fundData, campaignsData, projectsData, isLoading, totalProjects, total_pages } = useCampaignProjects({
     campaignId,
     page,
     limit: 10,
@@ -54,18 +54,18 @@ export default function ListIdeasByCampaignPage() {
           { title: 'Funds', to: '/funds' },
           { title: fundData.name, to: `/funds/${fundData.id}` },
           { title: campaignsData.name, to: `/campaigns/${campaignsData.id}` },
-          { title: 'Ideas' }
+          { title: 'Projects' }
         ]
       : [];
 
   if (isLoading || !fundData || !campaignsData) {
     return (
       <>
-        <Breadcrumbs custom heading="Ideas" links={breadcrumbLinks} />
+        <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
           {[...Array(2)].map((_, idx) => (
             <Grid key={idx} size={{ xs: 12 }}>
-              <SkeletonListIdeasCard />
+              <SkeletonListProjectsCard />
             </Grid>
           ))}
         </Grid>
@@ -75,11 +75,11 @@ export default function ListIdeasByCampaignPage() {
 
   return (
     <>
-      <Breadcrumbs custom heading="Ideas" links={breadcrumbLinks} />
+      <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
 
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
         <Typography variant="subtitle1">
-          Total Ideas: <strong>{totalIdeas}</strong>
+          Total Projects: <strong>{totalProjects}</strong>
         </Typography>
 
         <Box>
@@ -99,32 +99,26 @@ export default function ListIdeasByCampaignPage() {
       <Grid container spacing={GRID_COMMON_SPACING}>
         <Grid size={{ xs: 12 }}>
           <Stack spacing={GRID_COMMON_SPACING}>
-            {ideasData.length > 0 ? (
-              ideasData.map((idea) => (
-                <ListIdeasCard
-                  key={idea.id}
-                  idea={{
-                    id: idea.id,
-                    title: idea.title,
-                    idea_number: idea.idea_number,
-                    description: idea.description,
-                    kudo_count: idea.kudo_count,
-                    submitter_name: idea.submitter_name,
-                    created_at: idea.created_at,
-                    link: `/ideas/${idea.id}`,
-                    campaign: {
-                      id: idea.campaign_id,
-                      name: idea.campaign_name
-                    },
-                    fund: {
-                      id: idea.fund_no,
-                      name: idea.fund
-                    }
+            {projectsData.length > 0 ? (
+              projectsData.map((project) => (
+                console.log(project),
+                <ListProjectsCard
+                  key={project.id}
+                  project={{
+                    id: project.id,
+                    title: project.title,
+                    project_number: project.project_number,
+                    description: project.description,
+                    submitter_name: project.submitters[0].name,
+                    created_at: project.created_at,
+                    link: `/projects/${project.id}`
                   }}
+                  fund={fundData}
+                  campaign={campaignsData}
                 />
               ))
             ) : (
-              <Typography>No ideas found for this campaign.</Typography>
+              <Typography>No projects found for this campaign.</Typography>
             )}
           </Stack>
         </Grid>
