@@ -45,7 +45,7 @@ export function useFundsData(sortField?: string, sortDirection: SortDirection = 
   return {
     fundsData: memoizedValue,
     totalFunds: data?.data?.funds_count || 0,
-    totalIdeas: data?.data?.items_count || 0,
+    totalProjects: data?.data?.items_count || 0,
     homeLoading: isLoading,
     error,
     mutate
@@ -85,7 +85,7 @@ export function useCampaignsPerFundData(fundId: any, sortField?: string, sortDir
     fundData: data?.data.fund || null,
     campaignsData: memoizedValue,
     totalCampaigns: data?.data?.count || memoizedValue.length,
-    totalIdeas: data?.data?.ideas_count || 0,
+    totalProjects: data?.data?.projects_count || 0,
     isLoading,
     error,
     mutate
