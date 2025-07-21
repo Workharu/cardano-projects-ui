@@ -1,16 +1,26 @@
 import { useNavigate } from 'react-router';
 import { Button, Stack, Typography, Box, Chip } from '@mui/material';
-import { Eye, Heart } from 'iconsax-react';
 
+/** Icons **/
+import { Eye } from 'iconsax-react';
+
+/** Components **/
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 
-import { IdeasCardData } from 'types/ideas';
-
+/** Types **/
+import { ProjectsCardData, FundData, CampaignData } from 'types/projects';
 interface Props {
-  idea: IdeasCardData;
+  project: ProjectsCardData;
+  fund?: FundData;
+  campaign?: CampaignData;
 }
 
+/**
+ * Function to remove images and truncate HTML content to 300 characters
+ * @param html - The HTML string to process
+ * @returns A string with images removed and truncated to 300 characters
+ */
 function removeImagesAndTruncate(html: string | undefined): string {
   if (!html) return '';
   const withoutImages = html.replace(/<img[^>]*>/gi, '');
@@ -18,9 +28,14 @@ function removeImagesAndTruncate(html: string | undefined): string {
   return plainText.length > 300 ? `${plainText.slice(0, 300)}...` : plainText;
 }
 
-export default function ListIdeasCard({ idea }: Props) {
+/**
+ * ListProjectsCard component to display project details
+ * @param {Props} props - Contains project, fund, and campaign data
+ * @returns JSX Element
+ */
+export default function ListProjectsCard({ project, fund, campaign }: Props) {
   const navigate = useNavigate();
-  const { id, title = 'No Title', idea_number, description, created_at, campaign, fund, kudo_count = 0, submitter_name = 'Unknown' } = idea;
+  const { id, title, description, created_at, submitter_name } = project;
 
   const formattedDate = created_at ? new Date(created_at).toLocaleDateString() : 'Unknown date';
 
@@ -31,11 +46,11 @@ export default function ListIdeasCard({ idea }: Props) {
         <Stack alignItems="center" spacing={1} minWidth={80}>
           <Avatar sx={{ height: 40, width: 40 }}>{title.charAt(0).toUpperCase()}</Avatar>
           <Typography variant="caption" color="text.secondary">
-            Idea #{idea_number}
+            Project #{id}
           </Typography>
-          <Typography variant="body2" color="error.main" display="flex" alignItems="center" gap={0.5}>
+          {/* <Typography variant="body2" color="error.main" display="flex" alignItems="center" gap={0.5}>
             <Heart size={16} variant="Bold" /> {kudo_count}
-          </Typography>
+          </Typography> */}
         </Stack>
 
         {/* Right Section */}
@@ -91,10 +106,10 @@ export default function ListIdeasCard({ idea }: Props) {
             startIcon={<Eye />}
             variant="outlined"
             color="primary"
-            onClick={() => navigate(`/ideas/${id}`)}
+            onClick={() => navigate(`/projects/${id}`)}
             sx={{ alignSelf: 'flex-start' }}
           >
-            View Idea
+            View Project
           </Button>
         </Stack>
       </Stack>

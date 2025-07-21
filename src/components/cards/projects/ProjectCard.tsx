@@ -4,15 +4,22 @@ import { Eye, Heart } from 'iconsax-react';
 
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
-import { IdeasCardData } from 'types/ideas';
+import { ProjectsCardData } from 'types/projects';
 
 interface Props {
-  idea: IdeasCardData;
+  project: ProjectsCardData;
 }
 
-export default function IdeaCard({ idea }: Props) {
+export default function ProjectCard({ project }: Props) {
   const navigate = useNavigate();
-  const { id, title = 'No Title', idea_number, description, created_at, campaign, fund, kudo_count = 0, submitter_name = 'Unknown' } = idea;
+  const {
+    id,
+    title,
+    description,
+    full_detail,
+    created_at,
+    submitters,
+  } = project;
 
   const formattedDate = created_at ? new Date(created_at).toLocaleDateString() : 'Unknown date';
 
@@ -23,11 +30,11 @@ export default function IdeaCard({ idea }: Props) {
         <Stack alignItems="center" spacing={1} minWidth={80}>
           <Avatar sx={{ height: 40, width: 40 }}>{title.charAt(0).toUpperCase()}</Avatar>
           <Typography variant="caption" color="text.secondary">
-            Idea #{idea_number}
+            Project #{id}
           </Typography>
-          <Typography variant="body2" color="error.main" display="flex" alignItems="center" gap={0.5}>
+          {/* <Typography variant="body2" color="error.main" display="flex" alignItems="center" gap={0.5}>
             <Heart size={16} variant="Bold" /> {kudo_count}
-          </Typography>
+          </Typography> */}
         </Stack>
       </Stack>
     </MainCard>

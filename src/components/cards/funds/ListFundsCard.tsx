@@ -34,7 +34,7 @@ export default function ListFundsCard({ name, updated_at, total, link }: Props) 
                 })}
               </Typography> */}
               <Typography variant="subtitle2" color="text.secondary">
-                Idea count: {total}
+                Project count: {total}
               </Typography>
             </Stack>
           </Stack>

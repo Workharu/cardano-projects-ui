@@ -26,7 +26,7 @@ export default function ListCamaignsPerFundCard({ name, total, link }: Props) {
             </Typography>
             <Stack direction="column" spacing={0}>
               <Typography variant="subtitle2" color="text.secondary">
-                Idea count: {total}
+                Project count: {total}
               </Typography>
             </Stack>
           </Stack>

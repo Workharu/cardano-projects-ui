@@ -12,14 +12,14 @@ import DOMPurify from 'dompurify';
 interface Props {
   name: string;
   subtitle?: string;
-  featuredImageUrl?: string;
-  featuredImageAltText?: string;
+  featured_image_url?: string;
+  featured_image_alt_text?: string;
   summary?: string;
   description?: string;
 }
 
 export default function CampaignCard({ campaignsData }: { campaignsData: Props }) {
-  const { name, subtitle, featuredImageUrl, featuredImageAltText, summary, description } = campaignsData;
+  const { name, subtitle, featured_image_url, featured_image_alt_text, summary, description } = campaignsData;
 
   return (
     <MainCard sx={{ backgroundColor: 'transparent', boxShadow: 'none', p: 0 }}>
@@ -32,11 +32,11 @@ export default function CampaignCard({ campaignsData }: { campaignsData: Props }
         )}
 
         {/* Image */}
-        {featuredImageUrl && (
+        {featured_image_url && (
           <Box
             component="img"
-            src={featuredImageUrl}
-            alt={featuredImageAltText || name}
+            src={featured_image_url}
+            alt={featured_image_alt_text || name}
             sx={{
               width: '100%',
               maxHeight: { xs: 200, md: 300 },
