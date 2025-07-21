@@ -12,7 +12,7 @@ import { HomeCardData } from 'types/home';
 
 // Define icon and color mapping
 const iconMap: Record<string, any> = {
-  ideas: {
+  projects: {
     iconPrimary: Bookmark2,
     color: 'primary.darker',
     bgcolor: 'primary.lighter'
@@ -58,7 +58,7 @@ export function useHomeData() {
       const { iconPrimary, color, bgcolor } = iconMap[name] || {};
 
       return {
-        title: `Total ${item.title}`,
+        title: item.title,
         value: item.value,
         date: item.date,
         iconPrimary,
