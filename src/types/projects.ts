@@ -1,4 +1,4 @@
-export interface IdeasData {
+export interface ProjectsData {
   id: string;
   name: string;
   created_at: Date;
@@ -7,30 +7,30 @@ export interface IdeasData {
   link: string;
 }
 
-export interface IdeasCardData {
+export interface ProjectsCardData {
   id: string | number;
   title: string;
-  idea_number: number;
+  project_number: number;
   description: string;
-  kudo_count: number;
   submitter_name: string;
   created_at: string;
   link: string;
-  campaign: {
+  campaign?: {
     id: number;
     name: string;
   };
-  fund: {
+  fund?: {
     id: number;
     name: string;
   };
 }
 
-export interface IdeaData {
+export interface ProjectData {
   id: string | number;
+  full_detail: string;
   campaign_id: number;
   campaign_groupid: number;
-  campaign_ideacount: number;
+  campaign_projectcount: number;
   campaign_name: string;
   campaign_expiry_date: string; // ISO format timestamp
   requested_fund: number;
@@ -40,7 +40,7 @@ export interface IdeaData {
   fund: string;
   fund_no: number;
   title: string;
-  idea_number: number;
+  project_number: number;
   description: string;
   funnel_id: number;
   co_submitters: string;
@@ -49,28 +49,26 @@ export interface IdeaData {
   member_action_allowed: boolean;
   comment_count: number;
   kudo_count: number;
-  owner_count: number;
-  kudo_given: boolean;
   labels: string;
   render_format: number;
   kudos_allowed: boolean;
   commenting_allowed: boolean;
   commenting_enabled: boolean;
   following_enabled: boolean;
-  following_idea_author: boolean;
+  following_project_author: boolean;
   assignment_text: string;
   pinned: boolean;
   summarized: boolean;
   draft: boolean;
   sharable: boolean;
-  email_idea_allowed: boolean;
+  email_project_allowed: boolean;
   created_at: string; // ISO format timestamp
-  linked_ideas: string;
+  linked_Projects: string;
   file_attachment_allowed: boolean;
-  edit_idea_allowed: boolean;
+  edit_project_allowed: boolean;
   followers_count: number;
   tickets: string;
-  idea_view_count: number;
+  project_view_count: number;
   revision_history_count: number;
   default_tab: string;
   last_edited_at: string | null; // ISO timestamp or null
@@ -80,19 +78,29 @@ export interface IdeaData {
   custom_attachments: string;
   comment_attachments: string;
   attachments: string;
-  submitter_id: number;
-  submitter_name: string;
-  submitter_username: string;
-  submitter_following: boolean;
-  submitter_avatar: string;
-  submitter_identity_hidden: boolean;
+  submitters: {
+    _id: number;
+    name: string;
+    username: string;
+    avatarUrl: string;
+  }[];
   translation_translated: boolean;
   allowedmedialist: string;
   fieldsections: string;
-  ideatagholder: string;
+  projecttagholder: string;
   supercommentsholder: string;
   commentoptionsholder: string;
   lasteditedby_username: string;
   source_file: string;
   processed_at: string | null; // ISO timestamp or null
+}
+
+export interface FundData {
+  id: number;
+  name: string;
+}
+
+export interface CampaignData {
+  id: number;
+  name: string;
 }
