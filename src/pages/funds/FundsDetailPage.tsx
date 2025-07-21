@@ -34,7 +34,7 @@ export default function FundsDetailPage() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   // Fetching campaigns data for the specific fund
-  const { fundData, campaignsData, isLoading, totalCampaigns, totalIdeas } = useCampaignsPerFundData(fundId, sortField, sortDirection);
+  const { fundData, campaignsData, isLoading, totalCampaigns, totalProjects } = useCampaignsPerFundData(fundId, sortField, sortDirection);
 
   // Breadcrumbs configuration
   const breadcrumbLinks = [
@@ -93,7 +93,7 @@ export default function FundsDetailPage() {
         <Typography variant="subtitle1">
           Total Campaigns: <strong>{totalCampaigns}</strong>
           <br />
-          Total Ideas: <strong>{totalIdeas}</strong>
+          Total Projects: <strong>{totalProjects}</strong>
         </Typography>
 
         <div>

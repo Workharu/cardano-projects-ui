@@ -28,7 +28,7 @@ export default function ListFundsPage() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { fundsData, homeLoading, totalFunds, totalIdeas } = useFundsData(sortField, sortDirection);
+  const { fundsData, homeLoading, totalFunds, totalProjects } = useFundsData(sortField, sortDirection);
 
   const handleSortMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -80,7 +80,7 @@ export default function ListFundsPage() {
         <Typography variant="subtitle1">
           Total Funds: <strong>{totalFunds}</strong>
           <br />
-          Total Ideas: <strong>{totalIdeas}</strong>
+          Total Projects: <strong>{totalProjects}</strong>
         </Typography>
 
         <div>
