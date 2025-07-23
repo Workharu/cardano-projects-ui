@@ -64,8 +64,7 @@ export function useProjectsData({ page = 1, limit = 10, order_by = 'id', order_d
 /**
  * Custom hook to fetch data for a specific project
  * @param projectId - The ID of the project to fetch data for
- * @returns { fundData, campaignData, projectData, isLoading, error, mutate }
- * @typedef {Object} ProjectData
+ * @returns An object containing project data, campaign data, fund data, metrics data, loading state, error state, and a mutate function
  */
 export function useProjectData(projectId: number | string | undefined) {
   const { data, isLoading, error, mutate } = useSWR(endpoints.project(projectId), fetcher, {
@@ -82,6 +81,8 @@ export function useProjectData(projectId: number | string | undefined) {
     fundData: data?.data.fund,
     campaignData: data?.data.campaign,
     projectData: memoizedValue,
+    fundingData: data?.data.funding,
+    votingData: data?.data.voting,
     metricsData: data?.data.metrics,
     isLoading,
     error,
