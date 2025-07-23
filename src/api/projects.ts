@@ -46,14 +46,8 @@ export function useProjectsData({ page = 1, limit = 10, order_by = 'id', order_d
     }
 
     return data.data.items.map((project: any) => ({
-      id: project.id,
-      title: project.title,
-      description: project.description,
-      submitter_name: project.submitters[0]?.name || 'Unknown',
-      created_at: project.created_at,
       link: `/projects/${project.id}`,
-      fund: project.fund,
-      campaign: project.campaign
+      ...project
     }));
   }, [data]);
 
