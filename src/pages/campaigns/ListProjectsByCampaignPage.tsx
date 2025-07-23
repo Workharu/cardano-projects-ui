@@ -100,23 +100,19 @@ export default function ListProjectsByCampaignPage() {
         <Grid size={{ xs: 12 }}>
           <Stack spacing={GRID_COMMON_SPACING}>
             {projectsData.length > 0 ? (
-              projectsData.map((project) => (
-                console.log(project),
-                <ListProjectsCard
-                  key={project.id}
-                  project={{
-                    id: project.id,
-                    title: project.title,
-                    project_number: project.project_number,
-                    description: project.description,
-                    submitter_name: project.submitters[0].name,
-                    created_at: project.created_at,
-                    link: `/projects/${project.id}`
-                  }}
-                  fund={fundData}
-                  campaign={campaignsData}
-                />
-              ))
+              projectsData.map(
+                (project) => (
+                  console.log(project),
+                  (
+                    <ListProjectsCard
+                      key={project.id}
+                  ]
+                      fund={fundData}
+                      campaign={campaignsData}
+                    />
+                  )
+                )
+              )
             ) : (
               <Typography>No projects found for this campaign.</Typography>
             )}
