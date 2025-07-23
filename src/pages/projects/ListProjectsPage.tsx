@@ -1,9 +1,21 @@
 import { useState } from 'react';
 
 /** MUI **/
-import Grid from '@mui/material/Grid2';
-import { Typography, Box, Button, Menu, MenuItem, Pagination, Stack } from '@mui/material';
-import { ArrowDown, ArrowUp } from 'iconsax-react';
+import {
+  Grid,
+  Typography,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  Pagination,
+  Stack,
+  Chip,
+  InputAdornment,
+  TextField,
+  CircularProgress
+} from '@mui/material';
+import { ArrowDown, ArrowUp, SearchNormal1, Filter, Sort } from 'iconsax-react';
 
 /** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
@@ -18,30 +30,73 @@ import SkeletonListProjectsCard from 'components/skeletons/SkeletonListProjectsC
 /** APIs **/
 import { useProjectsData } from 'api/projects';
 
+// Sort options with display labels
+const SORT_OPTIONS = [
+  { value: 'id', label: 'ID' },
+  { value: 'title', label: 'Title' },
+  { value: 'created_at', label: 'Date Created' },
+  { value: 'updated_at', label: 'Last Updated' },
+  { value: 'requested_fund', label: 'Funding Amount' }
+];
+
+// Status filter options
+const STATUS_FILTERS = [
+  { value: 'all', label: 'All Statuses' },
+  { value: 'Active', label: 'Active' },
+  { value: 'Completed', label: 'Completed' },
+  { value: 'Pending', label: 'Pending' }
+];
+
 export default function ListProjectsPage() {
   const [page, setPage] = useState(1);
-  const [sortField, setSortField] = useState<'id' | 'title' | 'created_at'>('id');
+  const [sortField, setSortField] = useState<'id' | 'title' | 'created_at' | 'updated_at' | 'requested_fund'>('id');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const [sortAnchorEl, setSortAnchorEl] = useState<null | HTMLElement>(null);
+  const [filterAnchorEl, setFilterAnchorEl] = useState<null | HTMLElement>(null);
 
   const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useProjectsData({
     page,
     limit: 10,
     order_by: sortField,
     order_dir: sortDirection
+    // search: searchQuery,
+    // status: statusFilter === 'all' ? undefined : statusFilter
   });
 
+  // Handlers for sort menu
   const handleSortMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+    setSortAnchorEl(event.currentTarget);
   };
 
-  const handleSortMenuClose = () => setAnchorEl(null);
+  const handleSortMenuClose = () => setSortAnchorEl(null);
 
   const handleSortChange = (field: typeof sortField) => {
     setSortField(field);
     setSortDirection((prev) => (sortField === field ? (prev === 'asc' ? 'desc' : 'asc') : 'asc'));
     setPage(1);
     handleSortMenuClose();
+  };
+
+  // Handlers for filter menu
+  const handleFilterMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setFilterAnchorEl(event.currentTarget);
+  };
+
+  const handleFilterMenuClose = () => setFilterAnchorEl(null);
+
+  const handleStatusFilterChange = (status: string) => {
+    setStatusFilter(status);
+    setPage(1);
+    handleFilterMenuClose();
+  };
+
+  // Handler for search
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setPage(1);
   };
 
   const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Projects' }];
@@ -51,8 +106,8 @@ export default function ListProjectsPage() {
       <>
         <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
-          {[...Array(2)].map((_, idx) => (
-            <Grid key={idx} size={{ xs: 12 }}>
+          {[...Array(4)].map((_, idx) => (
+            <Grid key={idx} item xs={12}>
               <SkeletonListProjectsCard />
             </Grid>
           ))}
@@ -65,14 +120,23 @@ export default function ListProjectsPage() {
     return (
       <>
         <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
-        <Box textAlign="center" mt={4}>
+        <Box
+          textAlign="center"
+          mt={4}
+          sx={{
+            p: 4,
+            borderRadius: 2,
+            bgcolor: 'background.paper',
+            boxShadow: 1
+          }}
+        >
           <Typography color="error" variant="h6" gutterBottom>
-            Failed to load projects.
+            Failed to load projects
           </Typography>
-          <Typography variant="body2" gutterBottom>
+          <Typography variant="body2" gutterBottom mb={3}>
             {error?.message || 'Something went wrong. Please try again later.'}
           </Typography>
-          <Button variant="contained" onClick={() => mutate()}>
+          <Button variant="contained" onClick={() => mutate()} startIcon={<CircularProgress size={20} color="inherit" />}>
             Retry
           </Button>
         </Box>
@@ -84,42 +148,135 @@ export default function ListProjectsPage() {
     <>
       <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
 
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="subtitle1">
-          Total Projects: <strong>{totalProjects}</strong>
-        </Typography>
+      {/* Search and Filter Bar */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: 'space-between',
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          gap: 2,
+          mb: 3,
+          p: 3,
+          borderRadius: 2,
+          bgcolor: 'background.paper',
+          boxShadow: 1
+        }}
+      >
+        <TextField
+          variant="outlined"
+          placeholder="Search projects..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchNormal1 size="20px" />
+              </InputAdornment>
+            ),
+            sx: {
+              borderRadius: 2,
+              width: { xs: '100%', sm: 300 }
+            }
+          }}
+        />
 
-        <Box>
-          <Button variant="outlined" onClick={handleSortMenuClick} endIcon={sortDirection === 'asc' ? <ArrowUp /> : <ArrowDown />}>
-            Sort by: {sortField.replace('_', ' ')}
+        <Stack direction="row" spacing={2}>
+          <Button variant="outlined" onClick={handleFilterMenuClick} startIcon={<Filter size="20px" />} sx={{ minWidth: 150 }}>
+            {statusFilter === 'all' ? 'Filter' : `Status: ${statusFilter}`}
           </Button>
-          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleSortMenuClose}>
-            {['id', 'title', 'created_at'].map((field) => (
-              <MenuItem key={field} onClick={() => handleSortChange(field as typeof sortField)}>
-                {field.replace('_', ' ').toUpperCase()} {sortField === field && (sortDirection === 'asc' ? '↑' : '↓')}
+          <Menu anchorEl={filterAnchorEl} open={Boolean(filterAnchorEl)} onClose={handleFilterMenuClose}>
+            {STATUS_FILTERS.map((filter) => (
+              <MenuItem key={filter.value} onClick={() => handleStatusFilterChange(filter.value)} selected={statusFilter === filter.value}>
+                {filter.label}
               </MenuItem>
             ))}
           </Menu>
-        </Box>
+
+          <Button
+            variant="outlined"
+            onClick={handleSortMenuClick}
+            startIcon={<Sort size="20px" />}
+            endIcon={sortDirection === 'asc' ? <ArrowUp size="18px" /> : <ArrowDown size="18px" />}
+            sx={{ minWidth: 180 }}
+          >
+            {SORT_OPTIONS.find((opt) => opt.value === sortField)?.label}
+          </Button>
+          <Menu anchorEl={sortAnchorEl} open={Boolean(sortAnchorEl)} onClose={handleSortMenuClose}>
+            {SORT_OPTIONS.map((option) => (
+              <MenuItem
+                key={option.value}
+                onClick={() => handleSortChange(option.value as typeof sortField)}
+                selected={sortField === option.value}
+              >
+                {option.label} {sortField === option.value && (sortDirection === 'asc' ? '↑' : '↓')}
+              </MenuItem>
+            ))}
+          </Menu>
+        </Stack>
       </Box>
 
+      {/* Results Summary */}
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <Typography variant="subtitle1" color="text.secondary">
+          Showing <strong>{projectsData.length}</strong> of <strong>{totalProjects}</strong> projects
+        </Typography>
+        <Chip
+          label={`Sorted by: ${SORT_OPTIONS.find((opt) => opt.value === sortField)?.label} ${sortDirection === 'asc' ? '↑' : '↓'}`}
+          color="primary"
+          variant="outlined"
+        />
+      </Box>
+
+      {/* Projects List */}
       <Grid container spacing={GRID_COMMON_SPACING}>
-        <Grid size={{ xs: 12 }}>
+        <Grid item xs={12}>
           <Stack spacing={GRID_COMMON_SPACING}>
             {projectsData.length > 0 ? (
               projectsData.map((project) => (
                 <ListProjectsCard key={project.id} project={project} fund={project.fund} campaign={project.campaign} />
               ))
             ) : (
-              <Typography>No projects found.</Typography>
+              <Box textAlign="center" p={4} borderRadius={2} bgcolor="background.paper" boxShadow={1}>
+                <Typography variant="h6" gutterBottom>
+                  No projects found
+                </Typography>
+                <Typography variant="body2" color="text.secondary" mb={2}>
+                  {searchQuery ? 'Try adjusting your search query' : 'There are currently no projects matching your filters'}
+                </Typography>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setStatusFilter('all');
+                  }}
+                >
+                  Clear filters
+                </Button>
+              </Box>
             )}
           </Stack>
         </Grid>
       </Grid>
 
+      {/* Pagination */}
       {total_pages > 1 && (
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Pagination count={total_pages} page={page} onChange={(_, newPage) => setPage(newPage)} color="primary" />
+        <Box display="flex" justifyContent="center" mt={4} p={3} borderRadius={2} bgcolor="background.paper" boxShadow={1}>
+          <Pagination
+            count={total_pages}
+            page={page}
+            onChange={(_, newPage) => setPage(newPage)}
+            color="primary"
+            shape="rounded"
+            showFirstButton
+            showLastButton
+            sx={{
+              '& .MuiPaginationItem-root': {
+                borderRadius: 1,
+                fontWeight: 600
+              }
+            }}
+          />
         </Box>
       )}
     </>
