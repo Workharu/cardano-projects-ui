@@ -1,106 +1,104 @@
-export interface ProjectsData {
-  id: string;
-  name: string;
-  created_at: Date;
-  updated_at: Date;
-  total: number;
-  link: string;
-}
-
 export interface ProjectsCardData {
-  id: string | number;
+  id: number;
   title: string;
-  project_number: number;
-  description: string;
-  submitter_name: string;
-  created_at: string;
+  description?: string;
+  created_at?: string;
+  updated_at?: string;
+  submitters?: Array<{
+    _id?: string;
+    name?: string;
+    username?: string;
+    avatarUrl?: string;
+  }>;
+  requested_fund?: number;
+  project_status?: string;
+  horizon_group?: string;
+  country?: string;
+  continent?: string;
+  website?: string;
+  fund?: FundData;
+  campaign?: CampaignData;
   link: string;
-  campaign?: {
-    id: number;
-    name: string;
-  };
-  fund?: {
-    id: number;
-    name: string;
-  };
+  slug?: string;
+  last_edited_by?: string | null;
+  completed?: any;
+  full_detail?: string | null;
+  left_over_voting?: any;
+  opensource?: boolean;
 }
 
 export interface ProjectData {
-  id: string | number;
-  full_detail: string;
-  campaign_id: number;
-  campaign_groupid: number;
-  campaign_projectcount: number;
-  campaign_name: string;
-  campaign_expiry_date: string; // ISO format timestamp
-  requested_fund: number;
-  requested_fund_usd: number;
-  project_duration: number;
-  opensource: boolean;
-  fund: string;
-  fund_no: number;
-  title: string;
-  project_number: number;
-  description: string;
-  funnel_id: number;
-  co_submitters: string;
-  subscribed: boolean;
-  moderate: boolean;
-  member_action_allowed: boolean;
-  comment_count: number;
-  kudo_count: number;
-  labels: string;
-  render_format: number;
-  kudos_allowed: boolean;
-  commenting_allowed: boolean;
-  commenting_enabled: boolean;
-  following_enabled: boolean;
-  following_project_author: boolean;
-  assignment_text: string;
-  pinned: boolean;
-  summarized: boolean;
-  draft: boolean;
-  sharable: boolean;
-  email_project_allowed: boolean;
-  created_at: string; // ISO format timestamp
-  linked_Projects: string;
-  file_attachment_allowed: boolean;
-  edit_project_allowed: boolean;
-  followers_count: number;
-  tickets: string;
-  project_view_count: number;
-  revision_history_count: number;
-  default_tab: string;
-  last_edited_at: string | null; // ISO timestamp or null
-  seen: boolean;
-  build_team_view_allowed: boolean;
-  custom_description_label: string;
-  custom_attachments: string;
-  comment_attachments: string;
-  attachments: string;
-  submitters: {
-    _id: number;
-    name: string;
-    username: string;
-    avatarUrl: string;
-  }[];
-  translation_translated: boolean;
-  allowedmedialist: string;
-  fieldsections: string;
-  projecttagholder: string;
-  supercommentsholder: string;
-  commentoptionsholder: string;
-  lasteditedby_username: string;
-  source_file: string;
-  processed_at: string | null; // ISO timestamp or null
-}
-
-export interface FundData {
   id: number;
-  name: string;
+  fund_id: number;
+  campaign_id: number;
+  title: string;
+  slug: string;
+  description: string | null;
+  submitters: Array<{
+    _id?: string;
+    name?: string;
+    username?: string;
+    avatarUrl?: string;
+  }>;
+  field_sections: any;
+  last_edited_by: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  project_status: string;
+  country: string | null;
+  continent: string | null;
+  horizon_group: string | null;
+  tags: any;
+  completed: any;
+  summary: string | null;
+  about_team: string | null;
+  full_detail: string | null;
+  website: string | null;
+  left_over_voting: any;
+  opensource?: boolean;
+  funding: {
+    id: number;
+    project_id: number;
+    distributed_to_date: JSON | null;
+    remaining: JSON | null;
+    requested: JSON | null;
+  };
 }
 
 export interface CampaignData {
   id: number;
   name: string;
+  slug?: string;
+  active?: boolean;
+}
+
+export interface FundData {
+  id: number;
+  name: string;
+  active?: boolean;
+  phase?: string;
+}
+
+export interface MetricsData {
+  uniqueness?: {
+    id?: number;
+    rank?: number;
+    value?: number;
+  };
+  social_and_environmental_impact?: {
+    id?: number;
+    has_impact?: string;
+  };
+}
+
+export interface ProjectResponse {
+  status_code: number;
+  message: string;
+  data: {
+    project: ProjectData;
+    campaign: CampaignData;
+    fund: FundData;
+    metrics: MetricsData;
+  };
+  error: any;
 }
