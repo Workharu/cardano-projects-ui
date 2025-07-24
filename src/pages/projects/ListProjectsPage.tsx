@@ -77,21 +77,32 @@ export default function ListProjectsPage() {
   const [sortField, setSortField] = useState<SortField>(order_by);
   const [sortDirection, setSortDirection] = useState<SortDir>(order_dir);
 
-  // Small helper to update URL params
   const updateQuery = useCallback(
     (patch: Record<string, any>, replace = true) => {
       const next = new URLSearchParams(searchParams);
-      Object.entries(patch).forEach(([k, v]) => {
+
+      let resetPage = false;
+      const fieldsThatResetPage = ['search', 'status', 'order_by', 'order_dir'];
+
+      for (const [k, v] of Object.entries(patch)) {
+        if (fieldsThatResetPage.includes(k)) {
+          const current = next.get(k);
+          if (String(v ?? '') !== (current ?? '')) {
+            resetPage = true;
+          }
+        }
+
         if (v === undefined || v === '' || v === 'all') {
           next.delete(k);
         } else {
           next.set(k, String(v));
         }
-      });
-      // reset page if filters changed
-      if ('search' in patch || 'status' in patch || 'order_by' in patch || 'order_dir' in patch) {
+      }
+
+      if (resetPage) {
         next.set('page', '1');
       }
+
       setSearchParams(next, { replace });
     },
     [searchParams, setSearchParams]
