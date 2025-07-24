@@ -14,6 +14,14 @@ interface ProjectsParams {
   limit?: number;
   order_by?: SortableFields;
   order_dir?: SortDirection;
+  search?: string;
+  status?: string;
+  project_status?: string;
+  country?: string;
+  continent?: string;
+  horizon_group?: string;
+  min_requested_fund?: number;
+  max_requested_fund?: number;
 }
 
 /** API endpoint configuration **/
@@ -22,17 +30,25 @@ const endpoints = {
   // individual project endpoint
   project: (projectId: any) => `${endpoints.base}/${projectId}`,
   // projects list endpoint with pagination and sorting
-  projects: ({ page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: ProjectsParams) =>
+  projects: (params: ProjectsParams) =>
     `${endpoints.base}?${qs.stringify({
-      page,
-      limit,
-      order_by,
-      order_dir
+      page: params.page || 1,
+      limit: params.limit || 10,
+      order_by: params.order_by || 'id',
+      order_dir: params.order_dir || 'desc',
+      search: params.search,
+      status: params.status,
+      project_status: params.project_status,
+      country: params.country,
+      continent: params.continent,
+      horizon_group: params.horizon_group,
+      min_requested_fund: params.min_requested_fund,
+      max_requested_fund: params.max_requested_fund
     })}`
 };
 
-export function useProjectsData({ page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: ProjectsParams) {
-  const key = endpoints.projects({ page, limit, order_by, order_dir });
+export function useProjectsData(params: ProjectsParams) {
+  const key = endpoints.projects(params);
 
   const { data, isLoading, error, mutate } = useSWR(key, fetcher, {
     revalidateIfStale: true,

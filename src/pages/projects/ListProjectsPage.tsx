@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 /** MUI **/
 import {
@@ -47,36 +48,86 @@ const STATUS_FILTERS = [
   { value: 'Pending', label: 'Pending' }
 ];
 
+type SortField = 'id' | 'title' | 'created_at' | 'updated_at' | 'requested_fund';
+type SortDir = 'asc' | 'desc';
+
 export default function ListProjectsPage() {
-  const [page, setPage] = useState(1);
-  const [sortField, setSortField] = useState<'id' | 'title' | 'created_at' | 'updated_at' | 'requested_fund'>('id');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Helpers to read params with fallbacks
+  const getNumber = (key: string, def: number) => {
+    const v = Number(searchParams.get(key));
+    return Number.isFinite(v) && v > 0 ? v : def;
+  };
+  const getString = (key: string, def: string) => searchParams.get(key) ?? def;
+
+  const page = getNumber('page', 1);
+  const limit = getNumber('limit', 10);
+  const order_by = (getString('order_by', 'id') as SortField) ?? 'id';
+  const order_dir = (getString('order_dir', 'desc') as SortDir) ?? 'desc';
+  const search = getString('search', '');
+  const status = getString('status', 'all');
 
   const [sortAnchorEl, setSortAnchorEl] = useState<null | HTMLElement>(null);
   const [filterAnchorEl, setFilterAnchorEl] = useState<null | HTMLElement>(null);
 
+  // Local UI state
+  const [searchQuery, setSearchQuery] = useState(search);
+  const [statusFilter, setStatusFilter] = useState(status);
+  const [sortField, setSortField] = useState<SortField>(order_by);
+  const [sortDirection, setSortDirection] = useState<SortDir>(order_dir);
+
+  // Small helper to update URL params
+  const updateQuery = useCallback(
+    (patch: Record<string, any>, replace = true) => {
+      const next = new URLSearchParams(searchParams);
+      Object.entries(patch).forEach(([k, v]) => {
+        if (v === undefined || v === '' || v === 'all') {
+          next.delete(k);
+        } else {
+          next.set(k, String(v));
+        }
+      });
+      // reset page if filters changed
+      if ('search' in patch || 'status' in patch || 'order_by' in patch || 'order_dir' in patch) {
+        next.set('page', '1');
+      }
+      setSearchParams(next, { replace });
+    },
+    [searchParams, setSearchParams]
+  );
+
+  // Debounced query sync
+  useEffect(() => {
+    const t = setTimeout(() => {
+      updateQuery({
+        search: searchQuery,
+        status: statusFilter,
+        order_by: sortField,
+        order_dir: sortDirection
+      });
+    }, 500);
+
+    return () => clearTimeout(t);
+  }, [searchQuery, statusFilter, sortField, sortDirection, updateQuery]);
+
   const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useProjectsData({
     page,
-    limit: 10,
+    limit,
     order_by: sortField,
-    order_dir: sortDirection
-    // search: searchQuery,
-    // status: statusFilter === 'all' ? undefined : statusFilter
+    order_dir: sortDirection,
+    search: searchQuery || undefined,
+    status: statusFilter === 'all' ? undefined : statusFilter
   });
 
   // Handlers for sort menu
   const handleSortMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSortAnchorEl(event.currentTarget);
   };
-
   const handleSortMenuClose = () => setSortAnchorEl(null);
-
-  const handleSortChange = (field: typeof sortField) => {
+  const handleSortChange = (field: SortField) => {
     setSortField(field);
-    setSortDirection((prev) => (sortField === field ? (prev === 'asc' ? 'desc' : 'asc') : 'asc'));
-    setPage(1);
+    setSortDirection((prev) => (sortField === field ? (prev === 'asc' ? 'desc' : 'asc') : 'desc'));
     handleSortMenuClose();
   };
 
@@ -84,19 +135,28 @@ export default function ListProjectsPage() {
   const handleFilterMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setFilterAnchorEl(event.currentTarget);
   };
-
   const handleFilterMenuClose = () => setFilterAnchorEl(null);
-
   const handleStatusFilterChange = (status: string) => {
     setStatusFilter(status);
-    setPage(1);
     handleFilterMenuClose();
   };
 
-  // Handler for search
+  // Search
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setPage(1);
+  };
+
+  // Pagination
+  const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
+    updateQuery({ page: newPage }, true);
+  };
+
+  // Clear all filters
+  const handleClearFilters = () => {
+    setSearchQuery('');
+    setStatusFilter('all');
+    setSortField('id');
+    setSortDirection('desc');
   };
 
   const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Projects' }];
@@ -206,7 +266,7 @@ export default function ListProjectsPage() {
             {SORT_OPTIONS.map((option) => (
               <MenuItem
                 key={option.value}
-                onClick={() => handleSortChange(option.value as typeof sortField)}
+                onClick={() => handleSortChange(option.value as SortField)}
                 selected={sortField === option.value}
               >
                 {option.label} {sortField === option.value && (sortDirection === 'asc' ? '↑' : '↓')}
@@ -244,13 +304,7 @@ export default function ListProjectsPage() {
                 <Typography variant="body2" color="text.secondary" mb={2}>
                   {searchQuery ? 'Try adjusting your search query' : 'There are currently no projects matching your filters'}
                 </Typography>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    setSearchQuery('');
-                    setStatusFilter('all');
-                  }}
-                >
+                <Button variant="outlined" onClick={handleClearFilters}>
                   Clear filters
                 </Button>
               </Box>
@@ -265,7 +319,7 @@ export default function ListProjectsPage() {
           <Pagination
             count={total_pages}
             page={page}
-            onChange={(_, newPage) => setPage(newPage)}
+            onChange={handlePageChange}
             color="primary"
             shape="rounded"
             showFirstButton
