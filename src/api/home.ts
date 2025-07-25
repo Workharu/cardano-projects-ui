@@ -34,6 +34,14 @@ const iconMap: Record<string, any> = {
   }
 };
 
+const linkMap: Record<string, string> = {
+  'total projects': '/projects',
+  'social and environmental impact': '/social-and-environmental-impact',
+  uniqueness: '/uniqueness',
+  budget: '/budget',
+  completeness: '/completeness'
+};
+
 /** API endpoint **/
 const endpoints = {
   key: 'home/data'
@@ -64,7 +72,7 @@ export function useHomeData() {
         iconPrimary,
         color,
         bgcolor,
-        link: `/${name}`
+        link: `${linkMap[name] || ''}`
       };
     });
   }, [data]);
