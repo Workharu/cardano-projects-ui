@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 
 /** Icons **/
-import { Bookmark2, Money, ProfileDelete, RefreshCircle } from 'iconsax-react';
+import { I3DCubeScan, Award, DollarCircle, Tree, TickCircle } from 'iconsax-react';
 
 /** Utility **/
 import { fetcher } from 'utils/axios';
@@ -12,23 +12,28 @@ import { HomeCardData } from 'types/home';
 
 // Define icon and color mapping
 const iconMap: Record<string, any> = {
-  projects: {
-    iconPrimary: Bookmark2,
+  'total projects': {
+    iconPrimary: I3DCubeScan,
     color: 'primary.darker',
     bgcolor: 'primary.lighter'
   },
   uniqueness: {
-    iconPrimary: RefreshCircle,
-    color: 'success.darker',
-    bgcolor: 'success.lighter'
+    iconPrimary: Award,
+    color: 'warning.darker',
+    bgcolor: 'warning.lighter'
+  },
+  'social and environmental impact': {
+    iconPrimary: Tree,
+    color: 'info.darker',
+    bgcolor: 'info.lighter'
   },
   budget: {
-    iconPrimary: Money,
+    iconPrimary: DollarCircle,
     color: 'warning.darker',
     bgcolor: 'warning.lighter'
   },
   completeness: {
-    iconPrimary: ProfileDelete,
+    iconPrimary: TickCircle,
     color: 'error.darker',
     bgcolor: 'error.lighter'
   }

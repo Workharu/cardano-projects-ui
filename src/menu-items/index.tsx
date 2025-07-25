@@ -1,6 +1,6 @@
 /** Components **/
 import home from './home';
-import funds from './funds';
+// import funds from './funds';
 import metrics from './metrics';
 
 /** Types **/
