@@ -60,8 +60,9 @@ export default function ListProjectsPage() {
 
   const [sortAnchorEl, setSortAnchorEl] = useState<null | HTMLElement>(null);
 
-  // Local UI state
-  const [searchQuery, setSearchQuery] = useState(search);
+  // Local UI state - separate from URL state
+  const [searchQuery, setSearchQuery] = useState(search); // Local input value
+  const [activeSearch, setActiveSearch] = useState(search); // Actually used for API calls
   const [sortField, setSortField] = useState<SortField>(order_by);
   const [sortDirection, setSortDirection] = useState<SortDir>(order_dir);
 
@@ -96,25 +97,26 @@ export default function ListProjectsPage() {
     [searchParams, setSearchParams]
   );
 
-  // Debounced query sync
+  // Only handle sort changes automatically
   useEffect(() => {
-    const t = setTimeout(() => {
-      updateQuery({
-        search: searchQuery,
-        order_by: sortField,
-        order_dir: sortDirection
-      });
-    }, 500);
+    updateQuery({
+      order_by: sortField,
+      order_dir: sortDirection
+    });
+  }, [sortField, sortDirection, updateQuery]);
 
-    return () => clearTimeout(t);
-  }, [searchQuery, sortField, sortDirection, updateQuery]);
+  // Sync URL search param to activeSearch (when URL changes externally)
+  useEffect(() => {
+    setActiveSearch(search);
+    setSearchQuery(search);
+  }, [search]);
 
   const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useProjectsData({
     page,
     limit,
     order_by: sortField,
     order_dir: sortDirection,
-    search: searchQuery || undefined
+    search: activeSearch || undefined
   });
 
   // Handlers for sort menu
@@ -128,9 +130,30 @@ export default function ListProjectsPage() {
     handleSortMenuClose();
   };
 
-  // Search
+  // Search handlers
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    setActiveSearch(searchQuery);
+    updateQuery({
+      search: searchQuery
+    });
+  };
+
+  const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchSubmit();
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setActiveSearch('');
+    updateQuery({
+      search: ''
+    });
   };
 
   // Pagination
@@ -141,8 +164,14 @@ export default function ListProjectsPage() {
   // Clear all filters
   const handleClearFilters = () => {
     setSearchQuery('');
+    setActiveSearch('');
     setSortField('id');
     setSortDirection('desc');
+    updateQuery({
+      search: '',
+      order_by: 'id',
+      order_dir: 'desc'
+    });
   };
 
   const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Projects' }];
@@ -209,23 +238,45 @@ export default function ListProjectsPage() {
           boxShadow: 1
         }}
       >
-        <TextField
-          variant="outlined"
-          placeholder="Search projects..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchNormal1 size="20px" />
-              </InputAdornment>
-            ),
-            sx: {
-              borderRadius: 2,
-              width: { xs: '100%', sm: 300 }
-            }
-          }}
-        />
+        <Box sx={{ display: 'flex', gap: 1, width: { xs: '100%', sm: 'auto' } }}>
+          <TextField
+            variant="outlined"
+            placeholder="Search projects... (Press Enter)"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onKeyPress={handleSearchKeyPress}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchNormal1 size="20px" />
+                </InputAdornment>
+              ),
+              endAdornment: searchQuery && (
+                <InputAdornment position="end">
+                  <Button
+                    size="small"
+                    onClick={handleClearSearch}
+                    sx={{
+                      minWidth: 'auto',
+                      p: 0.5,
+                      color: 'text.secondary',
+                      '&:hover': { color: 'text.primary' }
+                    }}
+                  >
+                    ✕
+                  </Button>
+                </InputAdornment>
+              ),
+              sx: {
+                borderRadius: 2,
+                width: { xs: '100%', sm: 300 }
+              }
+            }}
+          />
+          <Button variant="outlined" onClick={handleSearchSubmit} sx={{ minWidth: 'auto', px: 2, borderRadius: 2 }}>
+            Search
+          </Button>
+        </Box>
 
         <Stack direction="row" spacing={2}>
           <Button
@@ -255,6 +306,12 @@ export default function ListProjectsPage() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="subtitle1" color="text.secondary">
           Showing <strong>{projectsData.length}</strong> of <strong>{totalProjects}</strong> projects
+          {activeSearch && (
+            <span>
+              {' '}
+              for "<strong>{activeSearch}</strong>"
+            </span>
+          )}
         </Typography>
         <Chip
           label={`Sorted by: ${SORT_OPTIONS.find((opt) => opt.value === sortField)?.label} ${sortDirection === 'asc' ? '↑' : '↓'}`}
@@ -277,7 +334,7 @@ export default function ListProjectsPage() {
                   No projects found
                 </Typography>
                 <Typography variant="body2" color="text.secondary" mb={2}>
-                  {searchQuery ? 'Try adjusting your search query' : 'There are currently no projects matching your filters'}
+                  {activeSearch ? `No results found for "${activeSearch}"` : 'There are currently no projects matching your filters'}
                 </Typography>
                 <Button variant="outlined" onClick={handleClearFilters}>
                   Clear filters
