@@ -1,5 +1,5 @@
 // assets
-import { Award, Money, Check } from 'iconsax-react';
+import { Award, DollarCircle, Tree, TickCircle } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -7,9 +7,9 @@ import { NavItemType } from 'types/menu';
 /** Icons **/
 const icons = {
   uniquenessMetrics: Award,
-  budgetMetrics: Money,
-  socialAndEnvironmentalImpactMetrics: Check
-  // completenessMetrics: Check
+  budgetMetrics: DollarCircle,
+  socialAndEnvironmentalImpactMetrics: Tree,
+  completenessMetrics: TickCircle
 };
 
 // ==============================|| MENU ITEMS - METRICS ||============================== //
@@ -42,13 +42,14 @@ const metrics: NavItemType = {
       type: 'item',
       icon: icons.budgetMetrics,
       url: '/metrics/budget',
-      target: false
+      target: false,
+      disabled: true
     },
     {
       id: 'completeness',
       title: 'Completeness',
       type: 'item',
-      icon: icons.uniquenessMetrics, // Reusing icon for now
+      icon: icons.completenessMetrics,
       url: '/metrics/completeness',
       target: false,
       disabled: true
