@@ -1,7 +1,7 @@
 export interface ProjectsCardData {
   id: number;
   title: string;
-  description?: string | null | undefined;
+  description?: string | undefined;
   created_at?: string | null | undefined;
   updated_at?: string | null | undefined;
   submitters?: Array<{
