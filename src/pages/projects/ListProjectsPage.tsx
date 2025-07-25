@@ -16,7 +16,7 @@ import {
   TextField,
   CircularProgress
 } from '@mui/material';
-import { ArrowDown, ArrowUp, SearchNormal1, Filter, Sort } from 'iconsax-react';
+import { ArrowDown, ArrowUp, SearchNormal1, Sort } from 'iconsax-react';
 
 /** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
@@ -36,19 +36,10 @@ const SORT_OPTIONS = [
   { value: 'id', label: 'ID' },
   { value: 'title', label: 'Title' },
   { value: 'created_at', label: 'Date Created' },
-  { value: 'updated_at', label: 'Last Updated' },
-  { value: 'requested_fund', label: 'Funding Amount' }
+  { value: 'updated_at', label: 'Last Updated' }
 ];
 
-// Status filter options
-const STATUS_FILTERS = [
-  { value: 'all', label: 'All Statuses' },
-  { value: 'Active', label: 'Active' },
-  { value: 'Completed', label: 'Completed' },
-  { value: 'Pending', label: 'Pending' }
-];
-
-type SortField = 'id' | 'title' | 'created_at' | 'updated_at' | 'requested_fund';
+type SortField = 'id' | 'title' | 'created_at' | 'updated_at';
 type SortDir = 'asc' | 'desc';
 
 export default function ListProjectsPage() {
@@ -66,14 +57,11 @@ export default function ListProjectsPage() {
   const order_by = (getString('order_by', 'id') as SortField) ?? 'id';
   const order_dir = (getString('order_dir', 'desc') as SortDir) ?? 'desc';
   const search = getString('search', '');
-  const status = getString('status', 'all');
 
   const [sortAnchorEl, setSortAnchorEl] = useState<null | HTMLElement>(null);
-  const [filterAnchorEl, setFilterAnchorEl] = useState<null | HTMLElement>(null);
 
   // Local UI state
   const [searchQuery, setSearchQuery] = useState(search);
-  const [statusFilter, setStatusFilter] = useState(status);
   const [sortField, setSortField] = useState<SortField>(order_by);
   const [sortDirection, setSortDirection] = useState<SortDir>(order_dir);
 
@@ -113,22 +101,20 @@ export default function ListProjectsPage() {
     const t = setTimeout(() => {
       updateQuery({
         search: searchQuery,
-        status: statusFilter,
         order_by: sortField,
         order_dir: sortDirection
       });
     }, 500);
 
     return () => clearTimeout(t);
-  }, [searchQuery, statusFilter, sortField, sortDirection, updateQuery]);
+  }, [searchQuery, sortField, sortDirection, updateQuery]);
 
   const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useProjectsData({
     page,
     limit,
     order_by: sortField,
     order_dir: sortDirection,
-    search: searchQuery || undefined,
-    status: statusFilter === 'all' ? undefined : statusFilter
+    search: searchQuery || undefined
   });
 
   // Handlers for sort menu
@@ -140,16 +126,6 @@ export default function ListProjectsPage() {
     setSortField(field);
     setSortDirection((prev) => (sortField === field ? (prev === 'asc' ? 'desc' : 'asc') : 'desc'));
     handleSortMenuClose();
-  };
-
-  // Handlers for filter menu
-  const handleFilterMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setFilterAnchorEl(event.currentTarget);
-  };
-  const handleFilterMenuClose = () => setFilterAnchorEl(null);
-  const handleStatusFilterChange = (status: string) => {
-    setStatusFilter(status);
-    handleFilterMenuClose();
   };
 
   // Search
@@ -165,7 +141,6 @@ export default function ListProjectsPage() {
   // Clear all filters
   const handleClearFilters = () => {
     setSearchQuery('');
-    setStatusFilter('all');
     setSortField('id');
     setSortDirection('desc');
   };
@@ -177,7 +152,7 @@ export default function ListProjectsPage() {
       <>
         <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
-          {[...Array(4)].map((_, idx) => (
+          {[...Array(2)].map((_, idx) => (
             <Grid key={idx} item xs={12}>
               <SkeletonListProjectsCard />
             </Grid>
@@ -253,17 +228,6 @@ export default function ListProjectsPage() {
         />
 
         <Stack direction="row" spacing={2}>
-          <Button variant="outlined" onClick={handleFilterMenuClick} startIcon={<Filter size="20px" />} sx={{ minWidth: 150 }}>
-            {statusFilter === 'all' ? 'Filter' : `Status: ${statusFilter}`}
-          </Button>
-          <Menu anchorEl={filterAnchorEl} open={Boolean(filterAnchorEl)} onClose={handleFilterMenuClose}>
-            {STATUS_FILTERS.map((filter) => (
-              <MenuItem key={filter.value} onClick={() => handleStatusFilterChange(filter.value)} selected={statusFilter === filter.value}>
-                {filter.label}
-              </MenuItem>
-            ))}
-          </Menu>
-
           <Button
             variant="outlined"
             onClick={handleSortMenuClick}
