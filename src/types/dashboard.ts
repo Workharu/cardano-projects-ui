@@ -1,4 +1,4 @@
-export interface HomeCardData {
+export interface DashboardCardData {
   title: string;
   value: string;
   date: string;

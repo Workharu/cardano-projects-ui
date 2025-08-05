@@ -1,9 +1,11 @@
 export interface ProjectsCardData {
   id: number;
   title: string;
-  description?: string | undefined;
-  created_at?: string | null | undefined;
-  updated_at?: string | null | undefined;
+  description: string;
+  status?: string;
+  created_at?: string;
+  updated_at?: string;
+  website?: string;
   submitters?: Array<{
     _id?: string;
     name?: string;
@@ -12,19 +14,17 @@ export interface ProjectsCardData {
   }>;
   requested_fund?: number;
   project_status?: string;
-  horizon_group?: string | null | undefined;
-  country?: string | null | undefined;
-  continent?: string | null | undefined;
-  website?: string | null | undefined;
-  fund?: FundData;
-  campaign?: CampaignData;
-  link?: string;
-  slug?: string;
-  last_edited_by?: string | null;
-  completed?: any;
-  full_detail?: string | null;
-  left_over_voting?: any;
-  opensource?: boolean;
+  horizon_group?: string;
+  country?: string;
+  continent?: string;
+  campaign?: {
+    id?: number;
+    name?: string;
+  };
+  fund: {
+    id: number;
+    name: string;
+  };
 }
 
 export interface ProjectData {
