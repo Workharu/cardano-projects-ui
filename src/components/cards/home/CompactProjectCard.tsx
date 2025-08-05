@@ -13,6 +13,7 @@ import { Metrics } from 'types/metrics';
 interface Props {
   project: Metrics;
   metricType: keyof Metrics;
+  rank: number;
 }
 
 const METRICS_TYPES: Record<string, string> = {
