@@ -5,14 +5,14 @@ import Grid from '@mui/material/Grid2';
 import CompactProjectCard from './CompactProjectCard';
 
 /** Types **/
-import { MetricsProject } from 'api/metrics';
+import { Metrics } from 'types/metrics';
 
 interface Props {
   title: string;
-  projects: MetricsProject[];
+  projects: Metrics[];
   isLoading: boolean;
   error?: any;
-  metricType: 'uniqueness' | 'social_and_environmental_impact' | 'budget' | 'completeness';
+  metricType: keyof Metrics;
   totalItems: number;
   icon?: React.ReactNode;
 }

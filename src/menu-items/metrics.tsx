@@ -1,5 +1,5 @@
 // assets
-import { Award, DollarCircle, Tree, TickCircle } from 'iconsax-react';
+import { Award, Activity, Tree, TickCircle, People, Chart1 } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -7,9 +7,11 @@ import { NavItemType } from 'types/menu';
 /** Icons **/
 const icons = {
   uniquenessMetrics: Award,
-  budgetMetrics: DollarCircle,
-  socialAndEnvironmentalImpactMetrics: Tree,
-  completenessMetrics: TickCircle
+  socialImpactMetrics: People,
+  environmentalImpactMetrics: Tree,
+  sdgMetrics: Chart1,
+  completenessMetrics: TickCircle,
+  activityMetrics: Activity
 };
 
 // ==============================|| MENU ITEMS - METRICS ||============================== //
@@ -28,20 +30,38 @@ const metrics: NavItemType = {
       target: false
     },
     {
-      id: 'social_and_environmental_impact',
-      title: 'Socio-Environmental Impact',
+      id: 'social_impact',
+      title: 'Social Impact',
       type: 'item',
-      icon: icons.socialAndEnvironmentalImpactMetrics,
-      url: '/metrics/social-and-environmental-impact',
+      icon: icons.socialImpactMetrics,
+      url: '/metrics/social-impact',
       target: false,
       disabled: false
     },
     {
-      id: 'budget',
-      title: 'Budget Friendly',
+      id: 'environmental_impact',
+      title: 'Environmental Impact',
       type: 'item',
-      icon: icons.budgetMetrics,
-      url: '/metrics/budget',
+      icon: icons.environmentalImpactMetrics,
+      url: '/metrics/environmental-impact',
+      target: false,
+      disabled: false
+    },
+    {
+      id: 'sdg',
+      title: 'SDG Ratings',
+      type: 'item',
+      icon: icons.sdgMetrics,
+      url: '/metrics/sdg',
+      target: false,
+      disabled: true
+    },
+    {
+      id: 'activity',
+      title: 'Activity',
+      type: 'item',
+      icon: icons.activityMetrics,
+      url: '/metrics/activity',
       target: false,
       disabled: true
     },

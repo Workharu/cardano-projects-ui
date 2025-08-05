@@ -28,7 +28,7 @@ export default function ListFundsPage() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { fundsData, homeLoading, totalFunds, totalProjects } = useFundsData(sortField, sortDirection);
+  const { fundsData, fundsLoading, totalFunds, totalProjects } = useFundsData(sortField, sortDirection);
 
   const handleSortMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -48,7 +48,7 @@ export default function ListFundsPage() {
     handleSortMenuClose();
   };
 
-  if (homeLoading) {
+  if (fundsLoading) {
     return (
       <>
         <Breadcrumbs custom heading="Funds" links={breadcrumbLinks} />

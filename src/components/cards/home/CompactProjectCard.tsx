@@ -2,24 +2,25 @@ import { useNavigate } from 'react-router';
 import { Box, Typography, Chip, Avatar, Stack, IconButton, Tooltip, Paper } from '@mui/material';
 
 /** Icons **/
-import { Eye, Award, TrendUp, DollarCircle, TickCircle } from 'iconsax-react';
+import { Eye, Award, Tree, TrendUp, TickCircle, Activity, People } from 'iconsax-react';
 
 /** Components **/
 import DOMPurify from 'dompurify';
 
 /** Types **/
-import { MetricsProject } from 'api/metrics';
+import { Metrics } from 'types/metrics';
 
 interface Props {
-  project: MetricsProject;
-  metricType: 'uniqueness' | 'social_and_environmental_impact' | 'budget' | 'completeness';
-  rank: number;
+  project: Metrics;
+  metricType: keyof Metrics;
 }
 
 const METRICS_TYPES: Record<string, string> = {
   uniqueness: 'Uniqueness',
-  social_and_environmental_impact: 'Impact',
-  budget: 'Budget',
+  social_impact: 'Social Impact',
+  environmental_impact: 'Environmental Impact',
+  sdg: 'SDG',
+  activity: 'Activity',
   completeness: 'Completeness'
 };
 
@@ -44,14 +45,18 @@ const getMetricIcon = (type: string) => {
   switch (type) {
     case 'uniqueness':
       return <Award size="16px" />;
-    case 'social_and_environmental_impact':
+    case 'social_impact':
+      return <People size="16px" />;
+    case 'environmental_impact':
+      return <Tree size="16px" />;
+    case 'sdg':
       return <TrendUp size="16px" />;
-    case 'budget':
-      return <DollarCircle size="16px" />;
+    case 'activity':
+      return <Activity size="16px" />;
     case 'completeness':
       return <TickCircle size="16px" />;
     default:
-      return <TrendUp size="16px" />; // Default to social impact icon
+      return <TrendUp size="16px" />;
   }
 };
 
@@ -62,14 +67,19 @@ const getMetricColor = (type: string) => {
   switch (type) {
     case 'uniqueness':
       return 'warning.main';
-    case 'social_and_environmental_impact':
+    case 'social_impact':
       return 'info.main';
-    case 'budget':
+    case 'environmental_impact':
+      return 'success.main';
+    case 'sdg':
+      return 'primary.main';
+    case 'activity':
+      return 'secondary.main';
       return 'success.main';
     case 'completeness':
       return 'error.main';
     default:
-      return 'info.main'; // Default to social impact color
+      return 'info.main';
   }
 };
 
@@ -89,32 +99,34 @@ const getRankColor = (rank: number) => {
 export default function CompactProjectCard({ project, metricType, rank }: Props) {
   const navigate = useNavigate();
 
-  const { id, title, description, submitters, social_and_environmental_impact } = project;
+  const { id, title, description, submitters } = project;
   const submitter = submitters?.[0];
   const displayDescription = sanitizeAndTruncate(description);
 
   // Get metric value based on type
   const getMetricValue = () => {
-    if (metricType === 'social_and_environmental_impact') {
-      // For social impact, use the has_impact boolean
-      const hasImpact = social_and_environmental_impact?.has_impact;
+    // Handle social and environmental impact specially
+    if (metricType === 'social_impact' || metricType === 'environmental_impact') {
+      const hasImpact = project[metricType]?.has_impact;
 
       if (hasImpact === undefined || hasImpact === null) {
         return 'N/A';
       }
 
-      return hasImpact == 'True' ? 'Yes' : 'No';
-    } else {
-      // For other metrics, use the original logic
-      const metric = project[metricType];
-      if (!metric) return 'N/A';
-
-      if (metricType === 'budget') {
-        return `${metric.value?.toLocaleString() || 0} ₳`;
-      }
-
-      return `${((metric.value || 0) * 100).toFixed(1)}%`;
+      // Handle both string and boolean values
+      return hasImpact === true ? 'Yes' : 'No';
     }
+
+    // Handle other metrics (percentage-based)
+    const metric = project[metricType];
+    if (!metric || typeof metric !== 'object') return 'N/A';
+
+    console.log(metric);
+
+    const value = (metric as any).score;
+    if (value === undefined || value === null) return 'N/A';
+
+    return `${(value * 100).toFixed(1)}%`;
   };
 
   const handleViewDetails = () => {
@@ -123,14 +135,13 @@ export default function CompactProjectCard({ project, metricType, rank }: Props)
 
   // Get color based on metric type and value
   const getMetricDisplayColor = () => {
-    if (metricType === 'social_and_environmental_impact') {
-      const hasImpact = social_and_environmental_impact?.has_impact;
-      if (hasImpact == 'True') return 'success.main';
-      if (hasImpact == 'False') return 'error.main';
+    if (metricType === 'social_impact' || metricType === 'environmental_impact') {
+      const hasImpact = project[metricType]?.has_impact;
+      if (hasImpact == true) return 'success.main';
+      if (hasImpact == false) return 'error.main';
       return 'grey.500';
-    } else {
-      return getMetricColor(metricType);
     }
+    return getMetricColor(metricType as string);
   };
 
   return (
@@ -183,7 +194,9 @@ export default function CompactProjectCard({ project, metricType, rank }: Props)
         {submitter?.avatarUrl ? (
           <Avatar src={submitter.avatarUrl} alt={submitter.name} sx={{ width: 40, height: 40 }} />
         ) : (
-          <Avatar sx={{ width: 40, height: 40, fontSize: '1rem' }}>{submitter?.name?.charAt(0) || title.charAt(0).toUpperCase()}</Avatar>
+          <Avatar sx={{ width: 40, height: 40, fontSize: '1rem' }}>
+            {submitter?.name?.charAt(0) || title?.charAt(0)?.toUpperCase() || '?'}
+          </Avatar>
         )}
 
         {/* Content */}
@@ -259,13 +272,13 @@ export default function CompactProjectCard({ project, metricType, rank }: Props)
         }}
       >
         <Stack direction="row" alignItems="center" spacing={1}>
-          <Box sx={{ color: getMetricDisplayColor() }}>{getMetricIcon(metricType)}</Box>
+          <Box sx={{ color: getMetricDisplayColor() }}>{getMetricIcon(metricType as string)}</Box>
           <Typography variant="caption" color="text.secondary" textTransform="capitalize">
-            {METRICS_TYPES[metricType]}
+            {METRICS_TYPES[metricType as string] || metricType}
           </Typography>
         </Stack>
 
-        <Tooltip title={`${metricType.replace('_', ' ')} value: ${getMetricValue()}`}>
+        <Tooltip title={`${(metricType as string).replace(/_/g, ' ')} value: ${getMetricValue()}`}>
           <Chip
             size="small"
             label={getMetricValue()}

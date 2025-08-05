@@ -8,16 +8,6 @@ import { Eye, Calendar1, MoneySend, User, Link21 } from 'iconsax-react';
 import MainCard from 'components/MainCard';
 import DOMPurify from 'dompurify';
 
-/** Types **/
-import { FundData, CampaignData, ProjectsCardData } from 'types/projects';
-
-interface Props {
-  project: ProjectsCardData;
-  fund?: FundData;
-  campaign?: CampaignData;
-  showFullDescription?: boolean;
-}
-
 /**
  * Function to sanitize and truncate HTML content
  * @param html - The HTML string to process
@@ -65,7 +55,7 @@ const getFirstParagraph = (html: string | undefined): string => {
 /**
  * ListProjectsCard component to display project details in a card format
  */
-export default function ListProjectsCard({ project, fund, campaign, showFullDescription = false }: Props) {
+export default function ListProjectsCard({ project, fund, campaign, showFullDescription = false }: any) {
   const navigate = useNavigate();
   const { id, title, description, created_at, updated_at, submitters, requested_fund, project_status, horizon_group, country, continent } =
     project;

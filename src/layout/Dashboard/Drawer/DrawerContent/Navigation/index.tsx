@@ -62,19 +62,22 @@ export default function Navigation() {
           );
         }
         return (
-          <NavGroup
-            key={item.id}
-            selectedID={selectedID}
-            setSelectedID={setSelectedID}
-            setSelectedItems={setSelectedItems}
-            setSelectedLevel={setSelectedLevel}
-            selectedLevel={selectedLevel}
-            selectedItems={selectedItems}
-            lastItem={lastItem!}
-            remItems={remItems}
-            lastItemId={lastItemId}
-            item={item}
-          />
+          <>
+            <NavGroup
+              key={item.id}
+              selectedID={selectedID}
+              setSelectedID={setSelectedID}
+              setSelectedItems={setSelectedItems}
+              setSelectedLevel={setSelectedLevel}
+              selectedLevel={selectedLevel}
+              selectedItems={selectedItems}
+              lastItem={lastItem!}
+              remItems={remItems}
+              lastItemId={lastItemId}
+              item={item}
+            />
+            <Divider sx={{ my: 2, mx: 2 }} />
+          </>
         );
       default:
         return (

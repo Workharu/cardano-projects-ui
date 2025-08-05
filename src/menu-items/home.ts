@@ -51,7 +51,6 @@ const home: NavItemType = {
       url: '/projects',
       target: false,
       icon: icons.projects
-      // disabled: true
     }
   ]
 };

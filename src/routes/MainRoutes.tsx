@@ -30,6 +30,11 @@ const ListProjectsByCampaignPage = Loadable(lazy(() => import('pages/campaigns/L
 const ListProjectsPage = Loadable(lazy(() => import('pages/projects/ListProjectsPage')));
 const ProjectDetailPage = Loadable(lazy(() => import('pages/projects/ProjectDetailPage')));
 
+// Metrics pages
+const UniquenessPage = Loadable(lazy(() => import('pages/metrics/UniquenessPage')));
+const SocialImpactPage = Loadable(lazy(() => import('pages/metrics/SocialImpactPage')));
+const EnvironmentalImpactPage = Loadable(lazy(() => import('pages/metrics/EnvironmentalImpactPage')));
+
 // ==============================|| MAIN ROUTES ||============================== //
 
 const MainRoutes = {
@@ -78,6 +83,20 @@ const MainRoutes = {
         {
           path: 'projects/:projectId',
           element: <ProjectDetailPage />
+        },
+
+        // Metrics routes
+        {
+          path: 'metrics/uniqueness',
+          element: <UniquenessPage />
+        },
+        {
+          path: 'metrics/social-impact',
+          element: <SocialImpactPage />
+        },
+        {
+          path: 'metrics/environmental-impact',
+          element: <EnvironmentalImpactPage />
         },
 
         // Contact Us page
