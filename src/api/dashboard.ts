@@ -2,13 +2,13 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 
 /** Icons **/
-import { I3DCubeScan, Award, DollarCircle, Tree, TickCircle } from 'iconsax-react';
+import { I3DCubeScan, Money, WalletMoney, Award, Activity, Tree, TickCircle, People, Chart1 } from 'iconsax-react';
 
 /** Utility **/
 import { fetcher } from 'utils/axios';
 
 /** Types **/
-import { HomeCardData } from 'types/home';
+import { DashboardCardData } from 'types/dashboard';
 
 // Define icon and color mapping
 const iconMap: Record<string, any> = {
@@ -17,49 +17,71 @@ const iconMap: Record<string, any> = {
     color: 'primary.darker',
     bgcolor: 'primary.lighter'
   },
-  uniqueness: {
+  'total funds': {
+    iconPrimary: Money,
+    color: 'primary.darker',
+    bgcolor: 'primary.lighter'
+  },
+  'total campaigns': {
+    iconPrimary: WalletMoney,
+    color: 'primary.darker',
+    bgcolor: 'primary.lighter'
+  },
+  'highly unique projects': {
     iconPrimary: Award,
     color: 'warning.darker',
     bgcolor: 'warning.lighter'
   },
-  'social and environmental impact': {
+  'social impact': {
+    iconPrimary: People,
+    color: 'secondary.darker',
+    bgcolor: 'secondary.lighter'
+  },
+  'environmental impact': {
     iconPrimary: Tree,
     color: 'info.darker',
     bgcolor: 'info.lighter'
   },
-  budget: {
-    iconPrimary: DollarCircle,
+  'sdg ratings': {
+    iconPrimary: Chart1,
+    color: '#9c27b0',
+    bgcolor: '#e1bee7'
+  },
+  activity: {
+    iconPrimary: Activity,
     color: 'warning.darker',
     bgcolor: 'warning.lighter'
   },
   completeness: {
     iconPrimary: TickCircle,
-    color: 'error.darker',
-    bgcolor: 'error.lighter'
+    color: 'success.darker',
+    bgcolor: 'success.lighter'
   }
 };
 
 const linkMap: Record<string, string> = {
   'total projects': '/projects',
-  'social and environmental impact': '/social-and-environmental-impact',
-  uniqueness: '/uniqueness',
-  budget: '/budget',
-  completeness: '/completeness'
+  'highly unique projects': '/metrics/uniqueness',
+  'social impact': '/metrics/social-impact',
+  'environmental impact': '/metrics/environmental-impact',
+  'sdg ratings': '/metrics/sdg',
+  activity: '/metrics/activity',
+  completeness: '/metrics/completeness'
 };
 
 /** API endpoint **/
 const endpoints = {
-  key: 'home/data'
+  key: 'dashboard'
 };
 
-export function useHomeData() {
+export function useDashboardData() {
   const { data, isLoading } = useSWR(endpoints.key, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
 
-  const memoizedValue: HomeCardData[] = useMemo(() => {
+  const memoizedValue: DashboardCardData[] = useMemo(() => {
     const actualData = data?.data || [];
 
     if (!Array.isArray(actualData)) {
@@ -83,7 +105,7 @@ export function useHomeData() {
   }, [data]);
 
   return {
-    homeData: memoizedValue,
-    homeLoading: isLoading
+    dashboardData: memoizedValue,
+    dashboardLoading: isLoading
   };
 }

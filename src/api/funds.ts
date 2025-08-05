@@ -46,7 +46,7 @@ export function useFundsData(sortField?: string, sortDirection: SortDirection = 
     fundsData: memoizedValue,
     totalFunds: data?.data?.funds_count || 0,
     totalProjects: data?.data?.items_count || 0,
-    homeLoading: isLoading,
+    fundsLoading: isLoading,
     error,
     mutate
   };

@@ -1,114 +1,110 @@
 import useSWR from 'swr';
+import qs from 'query-string';
 import { useMemo } from 'react';
 
 /** Utility **/
 import { fetcher } from 'utils/axios';
 
 /** Types **/
-import { ProjectsCardData } from 'types/projects';
+import { Metrics } from 'types/metrics';
+import { SortableFields, SortDirection } from 'types/sort';
 
-// API endpoints for different metrics
-const endpoints = {
-  uniqueness: 'metrics/uniqueness/projects?limit=5&order_by=uniqueness_rank&order_dir=asc',
-  social_and_environmental_impact: 'metrics/social-and-environmental-impact/projects?limit=5&order_by=has_impact&order_dir=desc'
-  //   budget: 'budget/projects?limit=5&order_by=budget_rank&order_dir=asc',
-  //   completeness: 'completeness/projects?limit=5&order_by=completeness_rank&order_dir=asc'
+interface MetricsParams {
+  page?: number;
+  limit?: number;
+  order_by?: SortableFields;
+  order_dir?: SortDirection;
+}
+
+interface MetricConfig {
+  endpoint: string;
+  defaultOrderBy: SortableFields;
+  defaultOrderDir: SortDirection;
+}
+
+/** Metric configurations **/
+const METRIC_CONFIGS: Record<string, MetricConfig> = {
+  uniqueness: {
+    endpoint: 'uniqueness',
+    defaultOrderBy: 'uniqueness_score',
+    defaultOrderDir: 'desc'
+  },
+  social_impact: {
+    endpoint: 'social-impact',
+    defaultOrderBy: 'has_impact',
+    defaultOrderDir: 'desc'
+  },
+  environmental_impact: {
+    endpoint: 'environmental-impact',
+    defaultOrderBy: 'has_impact',
+    defaultOrderDir: 'desc'
+  },
+  sdg: {
+    endpoint: 'sdg',
+    defaultOrderBy: 'sdg_rank',
+    defaultOrderDir: 'asc'
+  },
+  activity: {
+    endpoint: 'activity',
+    defaultOrderBy: 'activity_rank',
+    defaultOrderDir: 'asc'
+  },
+  completeness: {
+    endpoint: 'completeness',
+    defaultOrderBy: 'completeness_rank',
+    defaultOrderDir: 'asc'
+  }
 };
 
-export interface MetricsProject extends ProjectsCardData {
-  uniqueness?: {
-    rank: number;
-    value: number;
-  };
-  social_and_environmental_impact?: {
-    has_impact: string;
-  };
-  budget?: {
-    rank: number;
-    value: number;
-  };
-  completeness?: {
-    rank: number;
-    value: number;
-  };
-}
+/**
+ * Generic hook to fetch metrics data based on type and parameters.
+ *
+ * @param metricType - The type of metric to fetch (e.g., 'uniqueness', 'social_impact').
+ * @param params - Parameters for pagination and sorting.
+ * @return An object containing the fetched metrics data, total items, loading state, error, and mutate function.
+ */
+function useMetrics(metricType: keyof typeof METRIC_CONFIGS, params: MetricsParams = {}) {
+  const config = METRIC_CONFIGS[metricType];
 
-export function useUniquenessMetrics() {
-  const { data, isLoading, error } = useSWR(endpoints.uniqueness, fetcher, {
+  const queryParams = {
+    page: params.page || 1,
+    limit: params.limit || 5,
+    order_by: params.order_by || config.defaultOrderBy,
+    order_dir: params.order_dir || config.defaultOrderDir
+  };
+
+  const endpoint = `metrics/${config.endpoint}/projects?${qs.stringify(queryParams)}`;
+
+  const { data, isLoading, error, mutate } = useSWR(endpoint, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
 
-  const memoizedValue: MetricsProject[] = useMemo(() => {
+  const memoizedValue: Metrics[] = useMemo(() => {
     const projects = data?.data?.items || [];
     return Array.isArray(projects) ? projects : [];
   }, [data]);
 
   return {
-    uniquenessProjects: memoizedValue,
+    projectsData: memoizedValue,
+    totalProjects: data?.data?.total_items ?? 0,
+    total_pages: data?.data?.total_pages ?? 0,
     isLoading,
     error,
-    totalItems: data?.data?.total_items || 0
+    mutate
   };
 }
 
-export function useSocialImpactMetrics() {
-  const { data, isLoading, error } = useSWR(endpoints.social_and_environmental_impact, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false
-  });
+/** Exported hooks using the generic implementation **/
+export const useUniquenessMetrics = (params?: MetricsParams) => useMetrics('uniqueness', params);
 
-  const memoizedValue: MetricsProject[] = useMemo(() => {
-    const projects = data?.data?.items || [];
-    return Array.isArray(projects) ? projects : [];
-  }, [data]);
+export const useSocialImpactMetrics = (params?: MetricsParams) => useMetrics('social_impact', params);
 
-  return {
-    socialImpactProjects: memoizedValue,
-    isLoading,
-    error,
-    totalItems: data?.data?.total_items || 0
-  };
-}
+export const useEnvironmentalImpactMetrics = (params?: MetricsParams) => useMetrics('environmental_impact', params);
 
-// export function useBudgetMetrics() {
-//   const { data, isLoading, error } = useSWR(endpoints.budget, fetcher, {
-//     revalidateIfStale: false,
-//     revalidateOnFocus: false,
-//     revalidateOnReconnect: false
-//   });
+// export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
 
-//   const memoizedValue: MetricsProject[] = useMemo(() => {
-//     const projects = data?.data?.items || [];
-//     return Array.isArray(projects) ? projects : [];
-//   }, [data]);
+// export const useActivityMetrics = (params?: MetricsParams) => useMetrics('activity', params);
 
-//   return {
-//     budgetProjects: memoizedValue,
-//     isLoading,
-//     error,
-//     totalItems: data?.data?.total_items || 0
-//   };
-// }
-
-// export function useCompletenessMetrics() {
-//   const { data, isLoading, error } = useSWR(endpoints.completeness, fetcher, {
-//     revalidateIfStale: false,
-//     revalidateOnFocus: false,
-//     revalidateOnReconnect: false
-//   });
-
-//   const memoizedValue: MetricsProject[] = useMemo(() => {
-//     const projects = data?.data?.items || [];
-//     return Array.isArray(projects) ? projects : [];
-//   }, [data]);
-
-//   return {
-//     completenessProjects: memoizedValue,
-//     isLoading,
-//     error,
-//     totalItems: data?.data?.total_items || 0
-//   };
-// }
+// export const useCompletenessMetrics = (params?: MetricsParams) => useMetrics('completeness', params);
