@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const SocialImpactPage = () => {
-  return (
-    <div>SocialImpactPage</div>
-  )
-}
+  return <div>SocialImpactPage</div>;
+};
 
-export default SocialImpactPage
+export default SocialImpactPage;

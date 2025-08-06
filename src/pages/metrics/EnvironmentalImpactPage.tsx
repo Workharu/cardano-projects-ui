@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const EnvironmentalImpactPage = () => {
-  return (
-    <div>EnvironmentalImpactPage</div>
-  )
-}
+  return <div>EnvironmentalImpactPage</div>;
+};
 
-export default EnvironmentalImpactPage
+export default EnvironmentalImpactPage;
