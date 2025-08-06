@@ -82,12 +82,15 @@ export interface FundData {
 export interface MetricsData {
   uniqueness?: {
     id?: number;
-    rank?: number;
-    value?: number;
+    score?: number;
+    top_similar_projects?: Array<{
+      id: number;
+      title: string;
+    }>;
   };
-  social_and_environmental_impact?: {
+  environmental_impact?: {
     id?: number;
-    has_impact?: string;
+    has_impact?: boolean;
   };
 }
 
