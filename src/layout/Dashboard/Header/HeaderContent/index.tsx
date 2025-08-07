@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
 /** MUI **/
 import { Theme } from '@mui/material/styles';
@@ -7,8 +7,8 @@ import Box from '@mui/material/Box';
 
 /** Components **/
 import FullScreen from './FullScreen';
-import MegaMenuSection from './MegaMenuSection';
-import Message from './Message';
+// import MegaMenuSection from './MegaMenuSection';
+// import Message from './Message';
 import MobileSection from './MobileSection';
 // import Notification from './Notification';
 import Search from './Search';
@@ -24,18 +24,18 @@ export default function HeaderContent() {
 
   const downLG = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
 
-  const megaMenu = useMemo(() => <MegaMenuSection />, []);
+  // const megaMenu = useMemo(() => <MegaMenuSection />, []);
 
   return (
     <>
       {menuOrientation === MenuOrientation.HORIZONTAL && !downLG && <DrawerHeader open={true} />}
       {!downLG && <Search />}
-      {!downLG && megaMenu}
+      {/* {!downLG && megaMenu} */}
       {downLG && <Box sx={{ width: 1, ml: 1 }} />}
 
       {/* <Notification /> */}
       {!downLG && <FullScreen />}
-      <Message />
+      {/* <Message /> */}
       {downLG && <MobileSection />}
     </>
   );

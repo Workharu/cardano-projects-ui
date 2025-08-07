@@ -34,6 +34,11 @@ const ProjectDetailPage = Loadable(lazy(() => import('pages/projects/ProjectDeta
 const UniquenessPage = Loadable(lazy(() => import('pages/metrics/UniquenessPage')));
 const SocialImpactPage = Loadable(lazy(() => import('pages/metrics/SocialImpactPage')));
 const EnvironmentalImpactPage = Loadable(lazy(() => import('pages/metrics/EnvironmentalImpactPage')));
+const SdgPage = Loadable(lazy(() => import('pages/metrics/SDGPage')));
+
+// Other pages
+const RoadmapPage = Loadable(lazy(() => import('pages/RoadmapPage')));
+const WhiteboardPage = Loadable(lazy(() => import('pages/WhiteboardPage')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -98,12 +103,26 @@ const MainRoutes = {
           path: 'metrics/environmental-impact',
           element: <EnvironmentalImpactPage />
         },
+        {
+          path: 'metrics/sdg',
+          element: <SdgPage />
+        },
 
         // Contact Us page
         {
           path: 'contact-us',
           element: <ContactUsPage />
         },
+        {
+          path: 'roadmap',
+          element: <RoadmapPage />
+        },
+        {
+          path: 'whiteboard',
+          element: <WhiteboardPage />
+        },
+
+        // Catch-all route for 404 errors
         {
           path: '*',
           element: <ErrorPage />

@@ -14,6 +14,7 @@ interface MetricsParams {
   limit?: number;
   order_by?: SortableFields;
   order_dir?: SortDirection;
+  search?: string;
 }
 
 interface MetricConfig {
@@ -31,12 +32,12 @@ const METRIC_CONFIGS: Record<string, MetricConfig> = {
   },
   social_impact: {
     endpoint: 'social-impact',
-    defaultOrderBy: 'social_impact',
+    defaultOrderBy: 'id',
     defaultOrderDir: 'desc'
   },
   environmental_impact: {
     endpoint: 'environmental-impact',
-    defaultOrderBy: 'environmental_impact',
+    defaultOrderBy: 'id',
     defaultOrderDir: 'desc'
   },
   sdg: {
@@ -70,7 +71,8 @@ function useMetrics(metricType: keyof typeof METRIC_CONFIGS, params: MetricsPara
     page: params.page || 1,
     limit: params.limit || 5,
     order_by: params.order_by || config.defaultOrderBy,
-    order_dir: params.order_dir || config.defaultOrderDir
+    order_dir: params.order_dir || config.defaultOrderDir,
+    search: params.search || ''
   };
 
   const endpoint = `metrics/${config.endpoint}/projects?${qs.stringify(queryParams)}`;

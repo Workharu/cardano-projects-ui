@@ -29,7 +29,7 @@ import { APP_DEFAULT_PATH, GRID_COMMON_SPACING } from 'config';
 import SkeletonListProjectsCard from 'components/skeletons/SkeletonListProjectsCard';
 
 /** APIs **/
-import { useSocialImpactMetrics } from 'api/metrics';
+import { useSdgMetrics } from 'api/metrics';
 
 // Sort options with display labels
 const SORT_OPTIONS = [
@@ -42,7 +42,7 @@ const SORT_OPTIONS = [
 type SortField = 'id' | 'title' | 'created_at' | 'updated_at';
 type SortDir = 'asc' | 'desc';
 
-export default function SocialImpactPage() {
+export default function SDGPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Helpers to read params with fallbacks
@@ -111,7 +111,7 @@ export default function SocialImpactPage() {
     setSearchQuery(search);
   }, [search]);
 
-  const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useSocialImpactMetrics({
+  const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useSdgMetrics({
     page,
     limit,
     order_by: sortField,
@@ -174,12 +174,16 @@ export default function SocialImpactPage() {
     });
   };
 
-  const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Metrics' }, { title: 'Social Impact' }];
+  const breadcrumbLinks = [
+    { title: 'Home', to: APP_DEFAULT_PATH },
+    { title: 'Metrics' },
+    { title: 'Sustainable Development Goals Ratings' }
+  ];
 
   if (isLoading || (!projectsData && !error)) {
     return (
       <>
-        <Breadcrumbs custom heading="Social Impact Projects" links={breadcrumbLinks} />
+        <Breadcrumbs custom heading="Sustainable Development Goals (SDG) Ratings Projects" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
           {[...Array(2)].map((_, idx) => (
             <Grid key={idx} item xs={12}>
@@ -194,7 +198,7 @@ export default function SocialImpactPage() {
   if (error) {
     return (
       <>
-        <Breadcrumbs custom heading="Social Impact Projects" links={breadcrumbLinks} />
+        <Breadcrumbs custom heading="Sustainable Development Goals (SDG) Ratings Projects" links={breadcrumbLinks} />
         <Box
           textAlign="center"
           mt={4}
@@ -221,7 +225,7 @@ export default function SocialImpactPage() {
 
   return (
     <>
-      <Breadcrumbs custom heading="Social Impact Projects" links={breadcrumbLinks} />
+      <Breadcrumbs custom heading="Sustainable Development Goals (SDG) Ratings Projects" links={breadcrumbLinks} />
 
       {/* Search and Filter Bar */}
       <Box

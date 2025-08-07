@@ -53,8 +53,7 @@ const metrics: NavItemType = {
       type: 'item',
       icon: icons.sdgMetrics,
       url: '/metrics/sdg',
-      target: false,
-      disabled: true
+      target: false
     },
     {
       id: 'activity',
