@@ -19,8 +19,8 @@ import { useDashboardData } from 'api/dashboard';
 import {
   useUniquenessMetrics,
   useSocialImpactMetrics,
-  useEnvironmentalImpactMetrics
-  // useSdgMetrics,
+  useEnvironmentalImpactMetrics,
+  useSdgMetrics
   // useActivityMetrics,
   // useCompletenessMetrics
 } from 'api/metrics';
@@ -58,7 +58,7 @@ export default function HomePage() {
     totalProjects: environmentalImpactTotal
   } = useEnvironmentalImpactMetrics();
 
-  // const { projectsData: sdgProjects, isLoading: sdgLoading, error: sdgError, totalProjects: sdgTotal } = useSdgMetrics();
+  const { projectsData: sdgProjects, isLoading: sdgLoading, error: sdgError, totalProjects: sdgTotal } = useSdgMetrics();
 
   // const {
   //   projectsData: activityProjects,
@@ -180,10 +180,10 @@ export default function HomePage() {
           icon={<Tree size="24px" style={{ color: '#4caf50' }} />}
         />
 
-        {/* <Divider sx={{ my: 2 }} /> */}
+        <Divider sx={{ my: 2 }} />
 
         {/* SDG Section */}
-        {/* <MetricsSection
+        <MetricsSection
           title="Top Sustainable Development Goals (SDG) Projects"
           projects={sdgProjects}
           isLoading={sdgLoading}
@@ -191,7 +191,7 @@ export default function HomePage() {
           metricType="sdg"
           totalItems={sdgTotal}
           icon={<Chart1 size="24px" style={{ color: '#9c27b0' }} />}
-        /> */}
+        />
 
         {/* <Divider sx={{ my: 2 }} /> */}
 

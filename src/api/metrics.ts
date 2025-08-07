@@ -41,8 +41,8 @@ const METRIC_CONFIGS: Record<string, MetricConfig> = {
   },
   sdg: {
     endpoint: 'sdg',
-    defaultOrderBy: 'sdg_rank',
-    defaultOrderDir: 'asc'
+    defaultOrderBy: 'sdg_confidence',
+    defaultOrderDir: 'desc'
   },
   activity: {
     endpoint: 'activity',
@@ -103,7 +103,7 @@ export const useSocialImpactMetrics = (params?: MetricsParams) => useMetrics('so
 
 export const useEnvironmentalImpactMetrics = (params?: MetricsParams) => useMetrics('environmental_impact', params);
 
-// export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
+export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
 
 // export const useActivityMetrics = (params?: MetricsParams) => useMetrics('activity', params);
 
