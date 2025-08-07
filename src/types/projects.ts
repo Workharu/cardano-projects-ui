@@ -88,6 +88,10 @@ export interface MetricsData {
       title: string;
     }>;
   };
+  social_impact?: {
+    id?: number;
+    has_impact?: boolean;
+  };
   environmental_impact?: {
     id?: number;
     has_impact?: boolean;

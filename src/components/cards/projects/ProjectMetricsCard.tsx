@@ -15,6 +15,7 @@ import { MessageText1, Like1 } from 'iconsax-react';
 
 /** Types **/
 import { MetricsData } from 'types/projects';
+import { Divider } from '@mui/material';
 
 const SectionHeader = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -86,6 +87,22 @@ export default function ProjectMetricsCard({ metrics, isMobile }: { metrics: Met
             )}
           </Stack>
         )}
+
+        <Divider sx={{ my: 2 }} />
+
+        {metrics.environmental_impact && (
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography variant="body1" color="text.secondary">
+              <Like1 size="18px" style={{ verticalAlign: 'middle', marginRight: 8 }} />
+              Social Impact
+            </Typography>
+            <Typography variant="body1" fontWeight="medium">
+              {metrics.social_impact?.has_impact == true ? 'Yes' : 'No'}
+            </Typography>
+          </Stack>
+        )}
+
+        <Divider sx={{ my: 2 }} />
 
         {metrics.environmental_impact && (
           <Stack direction="row" justifyContent="space-between" alignItems="center">

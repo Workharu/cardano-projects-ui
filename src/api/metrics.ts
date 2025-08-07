@@ -31,12 +31,12 @@ const METRIC_CONFIGS: Record<string, MetricConfig> = {
   },
   social_impact: {
     endpoint: 'social-impact',
-    defaultOrderBy: 'has_impact',
+    defaultOrderBy: 'social_impact',
     defaultOrderDir: 'desc'
   },
   environmental_impact: {
     endpoint: 'environmental-impact',
-    defaultOrderBy: 'has_impact',
+    defaultOrderBy: 'environmental_impact',
     defaultOrderDir: 'desc'
   },
   sdg: {

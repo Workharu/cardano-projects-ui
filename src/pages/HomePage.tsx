@@ -46,7 +46,10 @@ export default function HomePage() {
     isLoading: socialLoading,
     error: socialError,
     totalProjects: socialTotal
-  } = useSocialImpactMetrics();
+  } = useSocialImpactMetrics({
+    order_by: 'id',
+    order_dir: 'desc'
+  });
 
   const {
     projectsData: environmentalImpactProjects,
