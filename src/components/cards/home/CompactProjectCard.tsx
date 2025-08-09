@@ -118,14 +118,18 @@ export default function CompactProjectCard({ project, metricType, rank }: Props)
       return hasImpact === true ? 'Yes' : 'No';
     }
 
+    if (metricType === 'sdg') {
+      const { sdg_name, sdg_description } = project.sdg || {};
+
+      return sdg_name ? `${sdg_description}` : 'N/A';
+    }
+
     // Handle other metrics (percentage-based)
     const metric = project[metricType];
-    if (!metric || typeof metric !== 'object') return 'N/A';
+    if (!metric || typeof metric !== 'object') return null;
 
-    console.log(metric);
-
-    const value = (metric as any).score;
-    if (value === undefined || value === null) return 'N/A';
+    const value = (metric as any).score || (metric as any).sdg_confidence;
+    if (value === undefined || value === null) return null;
 
     return `${(value * 100).toFixed(1)}%`;
   };

@@ -2,8 +2,21 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 /** MUI **/
-import { Grid, Typography, Box, Button, Menu, MenuItem, Pagination, Stack, Chip, CircularProgress } from '@mui/material';
-import { ArrowDown, ArrowUp, Sort } from 'iconsax-react';
+import {
+  Grid,
+  Typography,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  Pagination,
+  Stack,
+  Chip,
+  InputAdornment,
+  TextField,
+  CircularProgress
+} from '@mui/material';
+import { ArrowDown, ArrowUp, SearchNormal1, Sort } from 'iconsax-react';
 
 /** Components **/
 import Breadcrumbs from 'components/@extended/Breadcrumbs';
@@ -27,7 +40,7 @@ const SORT_OPTIONS = [
   { value: 'updated_at', label: 'Last Updated' }
 ];
 
-type SortField = 'uniqueness_score' | 'id' | 'title' | 'created_at' | 'updated_at';
+type SortField = 'id' | 'title' | 'created_at' | 'updated_at';
 type SortDir = 'asc' | 'desc';
 
 export default function UniquenessPage() {
@@ -44,10 +57,13 @@ export default function UniquenessPage() {
   const limit = getNumber('limit', 10);
   const order_by = (getString('order_by', 'uniqueness_score') as SortField) ?? 'uniqueness_score';
   const order_dir = (getString('order_dir', 'desc') as SortDir) ?? 'desc';
+  const search = getString('search', '');
 
   const [sortAnchorEl, setSortAnchorEl] = useState<null | HTMLElement>(null);
 
   // Local UI state - separate from URL state
+  const [searchQuery, setSearchQuery] = useState(search); // Local input value
+  const [activeSearch, setActiveSearch] = useState(search); // Actually used for API calls
   const [sortField, setSortField] = useState<SortField>(order_by);
   const [sortDirection, setSortDirection] = useState<SortDir>(order_dir);
 
@@ -90,11 +106,18 @@ export default function UniquenessPage() {
     });
   }, [sortField, sortDirection, updateQuery]);
 
+  // Sync URL search param to activeSearch (when URL changes externally)
+  useEffect(() => {
+    setActiveSearch(search);
+    setSearchQuery(search);
+  }, [search]);
+
   const { projectsData, isLoading, error, totalProjects, total_pages, mutate } = useUniquenessMetrics({
     page,
     limit,
     order_by: sortField,
-    order_dir: sortDirection
+    order_dir: sortDirection,
+    search: activeSearch || undefined
   });
 
   // Handlers for sort menu
@@ -108,6 +131,32 @@ export default function UniquenessPage() {
     handleSortMenuClose();
   };
 
+  // Search handlers
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    setActiveSearch(searchQuery);
+    updateQuery({
+      search: searchQuery
+    });
+  };
+
+  const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchSubmit();
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setActiveSearch('');
+    updateQuery({
+      search: ''
+    });
+  };
+
   // Pagination
   const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
     updateQuery({ page: newPage }, true);
@@ -115,20 +164,23 @@ export default function UniquenessPage() {
 
   // Clear all filters
   const handleClearFilters = () => {
+    setSearchQuery('');
+    setActiveSearch('');
     setSortField('id');
     setSortDirection('desc');
     updateQuery({
-      order_by: 'id',
+      search: '',
+      order_by: 'uniqueness_score',
       order_dir: 'desc'
     });
   };
 
-  const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Projects' }];
+  const breadcrumbLinks = [{ title: 'Home', to: APP_DEFAULT_PATH }, { title: 'Metrics' }, { title: 'Uniqueness' }];
 
   if (isLoading || (!projectsData && !error)) {
     return (
       <>
-        <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
+        <Breadcrumbs custom heading="Uniqueness Projects" links={breadcrumbLinks} />
         <Grid container spacing={GRID_COMMON_SPACING}>
           {[...Array(2)].map((_, idx) => (
             <Grid key={idx} item xs={12}>
@@ -143,7 +195,7 @@ export default function UniquenessPage() {
   if (error) {
     return (
       <>
-        <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
+        <Breadcrumbs custom heading="Uniqueness Projects" links={breadcrumbLinks} />
         <Box
           textAlign="center"
           mt={4}
@@ -170,7 +222,7 @@ export default function UniquenessPage() {
 
   return (
     <>
-      <Breadcrumbs custom heading="Projects" links={breadcrumbLinks} />
+      <Breadcrumbs custom heading="Uniqueness Projects" links={breadcrumbLinks} />
 
       {/* Search and Filter Bar */}
       <Box
@@ -187,6 +239,46 @@ export default function UniquenessPage() {
           boxShadow: 1
         }}
       >
+        <Box sx={{ display: 'flex', gap: 1, width: { xs: '100%', sm: 'auto' } }}>
+          <TextField
+            variant="outlined"
+            placeholder="Search projects... (Press Enter)"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onKeyPress={handleSearchKeyPress}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchNormal1 size="20px" />
+                </InputAdornment>
+              ),
+              endAdornment: searchQuery && (
+                <InputAdornment position="end">
+                  <Button
+                    size="small"
+                    onClick={handleClearSearch}
+                    sx={{
+                      minWidth: 'auto',
+                      p: 0.5,
+                      color: 'text.secondary',
+                      '&:hover': { color: 'text.primary' }
+                    }}
+                  >
+                    ✕
+                  </Button>
+                </InputAdornment>
+              ),
+              sx: {
+                borderRadius: 2,
+                width: { xs: '100%', sm: 300 }
+              }
+            }}
+          />
+          <Button variant="outlined" onClick={handleSearchSubmit} sx={{ minWidth: 'auto', px: 2, borderRadius: 2 }}>
+            Search
+          </Button>
+        </Box>
+
         <Stack direction="row" spacing={2}>
           <Button
             variant="outlined"
@@ -215,6 +307,12 @@ export default function UniquenessPage() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="subtitle1" color="text.secondary">
           Showing <strong>{projectsData.length}</strong> of <strong>{totalProjects}</strong> projects
+          {activeSearch && (
+            <span>
+              {' '}
+              for "<strong>{activeSearch}</strong>"
+            </span>
+          )}
         </Typography>
         <Chip
           label={`Sorted by: ${SORT_OPTIONS.find((opt) => opt.value === sortField)?.label} ${sortDirection === 'asc' ? '↑' : '↓'}`}
@@ -235,6 +333,9 @@ export default function UniquenessPage() {
               <Box textAlign="center" p={4} borderRadius={2} bgcolor="background.paper" boxShadow={1}>
                 <Typography variant="h6" gutterBottom>
                   No projects found
+                </Typography>
+                <Typography variant="body2" color="text.secondary" mb={2}>
+                  {activeSearch ? `No results found for "${activeSearch}"` : 'There are currently no projects matching your filters'}
                 </Typography>
                 <Button variant="outlined" onClick={handleClearFilters}>
                   Clear filters

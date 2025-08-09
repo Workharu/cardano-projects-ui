@@ -14,6 +14,7 @@ interface MetricsParams {
   limit?: number;
   order_by?: SortableFields;
   order_dir?: SortDirection;
+  search?: string;
 }
 
 interface MetricConfig {
@@ -31,18 +32,18 @@ const METRIC_CONFIGS: Record<string, MetricConfig> = {
   },
   social_impact: {
     endpoint: 'social-impact',
-    defaultOrderBy: 'social_impact',
+    defaultOrderBy: 'id',
     defaultOrderDir: 'desc'
   },
   environmental_impact: {
     endpoint: 'environmental-impact',
-    defaultOrderBy: 'environmental_impact',
+    defaultOrderBy: 'id',
     defaultOrderDir: 'desc'
   },
   sdg: {
     endpoint: 'sdg',
-    defaultOrderBy: 'sdg_rank',
-    defaultOrderDir: 'asc'
+    defaultOrderBy: 'sdg_confidence',
+    defaultOrderDir: 'desc'
   },
   activity: {
     endpoint: 'activity',
@@ -70,7 +71,8 @@ function useMetrics(metricType: keyof typeof METRIC_CONFIGS, params: MetricsPara
     page: params.page || 1,
     limit: params.limit || 5,
     order_by: params.order_by || config.defaultOrderBy,
-    order_dir: params.order_dir || config.defaultOrderDir
+    order_dir: params.order_dir || config.defaultOrderDir,
+    search: params.search || ''
   };
 
   const endpoint = `metrics/${config.endpoint}/projects?${qs.stringify(queryParams)}`;
@@ -103,7 +105,7 @@ export const useSocialImpactMetrics = (params?: MetricsParams) => useMetrics('so
 
 export const useEnvironmentalImpactMetrics = (params?: MetricsParams) => useMetrics('environmental_impact', params);
 
-// export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
+export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
 
 // export const useActivityMetrics = (params?: MetricsParams) => useMetrics('activity', params);
 

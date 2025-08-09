@@ -12,6 +12,10 @@ export interface Metrics extends ProjectsCardData {
     has_impact: boolean;
   };
   sdg?: {
+    id: string;
+    sdg_name: string;
+    sdg_description: string;
+    sdg_confidence: number;
     sdg_rank: number;
   };
   completeness?: {

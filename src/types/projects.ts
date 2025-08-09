@@ -96,6 +96,13 @@ export interface MetricsData {
     id?: number;
     has_impact?: boolean;
   };
+  sdg?: {
+    id?: number;
+    sdg_name?: string;
+    sdg_number?: number;
+    sdg_description?: string;
+    sdg_confidence?: number;
+  };
 }
 
 export interface ProjectResponse {
