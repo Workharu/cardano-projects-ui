@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    BUCKET: cprojects.com
+    ENV_VAR: "IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIyBBcHBsaWNhdGlvbiBDb25maWd1cmF0aW9uICMjCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKVklURV9BUFBfVkVSU0lPTiA9IHY5LjMuMApHRU5FUkFURV9TT1VSQ0VNQVAgPSBmYWxzZQoKIyMjIyMjIyMjIyMjIyMjIwojIyBQdWJsaWMgVVJMICMjCiMjIyMjIyMjIyMjIyMjIyMKUFVCTElDX1VSTCA9IGh0dHBzOi8vY2FyZGFub3Byb2plY3RzLmNvbS8KVklURV9BUFBfQkFTRV9OQU1FID0gIi8iCgojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIyBBUEkgQ29uZmlndXJhdGlvbiAjIwojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwpWSVRFX0FQUF9BUElfVVJMPWh0dHBzOi8vYXBpLmNhcmRhbm9wcm9qZWN0cy5jb20vYXBpL3YxCg=="
+    CLOUDFRONT_DISTRIBUTION_ID: "E5MQNOQSQFJGH"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - echo $ENV_VAR | base64 --decode > .env
+      - npm ci
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      # Copy build output to S3
+      - aws s3 sync dist/ s3://$BUCKET  --delete --exclude "db/*"
+      # Invalidate CloudFront cache
+      - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/index.html" 
+
+artifacts:
+  files:
+    - '/root/.npm/**/*'
