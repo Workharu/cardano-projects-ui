@@ -35,11 +35,10 @@ This will launch the app at `http://localhost:3000` in your default browser.
 
 ## 🔧 Scripts
 
-| Command             | Description                  |
-| ------------------- | ---------------------------- |
-| `npm run start`     | Start development server     |
-| `npm run build`     | Build for production         |
-| `npm run test`      | Run unit tests               |
-| `npm run lint`      | Run linter                   |
-| `npm run lint:fix`  | Fix linting errors           |
-
+| Command            | Description              |
+| ------------------ | ------------------------ |
+| `npm run start`    | Start development server |
+| `npm run build`    | Build for production     |
+| `npm run test`     | Run unit tests           |
+| `npm run lint`     | Run linter               |
+| `npm run lint:fix` | Fix linting errors       |
