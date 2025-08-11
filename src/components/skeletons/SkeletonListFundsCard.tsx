@@ -1,6 +1,7 @@
-import { Card, CardContent, Stack } from '@mui/material';
+/** MUI **/
+import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
-import Grid from '@mui/material/Grid2';
+import { Card, CardContent, Stack } from '@mui/material';
 
 type Props = {
   variant?: 'card' | 'list';

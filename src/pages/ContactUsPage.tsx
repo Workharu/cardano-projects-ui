@@ -1,6 +1,6 @@
 /** MUI **/
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 
 /** Components **/
 import ContactForm from 'sections/contact/ContactForm';

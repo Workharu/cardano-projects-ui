@@ -3,7 +3,7 @@ import { useState, ChangeEvent } from 'react';
 /** MUI **/
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';

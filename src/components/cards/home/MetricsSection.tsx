@@ -1,5 +1,6 @@
+/** MUI **/
+import Grid from '@mui/material/Grid';
 import { Box, Typography, Stack, Skeleton, Alert } from '@mui/material';
-import Grid from '@mui/material/Grid2';
 
 /** Components **/
 import CompactProjectCard from './CompactProjectCard';
