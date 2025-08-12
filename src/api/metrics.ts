@@ -15,6 +15,7 @@ interface MetricsParams {
   order_by?: SortableFields;
   order_dir?: SortDirection;
   search?: string;
+  funding_status?: string;
 }
 
 interface MetricConfig {
@@ -25,36 +26,12 @@ interface MetricConfig {
 
 /** Metric configurations **/
 const METRIC_CONFIGS: Record<string, MetricConfig> = {
-  uniqueness: {
-    endpoint: 'uniqueness',
-    defaultOrderBy: 'uniqueness_score',
-    defaultOrderDir: 'desc'
-  },
-  social_impact: {
-    endpoint: 'social-impact',
-    defaultOrderBy: 'id',
-    defaultOrderDir: 'desc'
-  },
-  environmental_impact: {
-    endpoint: 'environmental-impact',
-    defaultOrderBy: 'id',
-    defaultOrderDir: 'desc'
-  },
-  sdg: {
-    endpoint: 'sdg',
-    defaultOrderBy: 'sdg_confidence',
-    defaultOrderDir: 'desc'
-  },
-  activity: {
-    endpoint: 'activity',
-    defaultOrderBy: 'activity_rank',
-    defaultOrderDir: 'asc'
-  },
-  completeness: {
-    endpoint: 'completeness',
-    defaultOrderBy: 'completeness_rank',
-    defaultOrderDir: 'asc'
-  }
+  uniqueness: { endpoint: 'uniqueness', defaultOrderBy: 'uniqueness_score', defaultOrderDir: 'desc' },
+  social_impact: { endpoint: 'social-impact', defaultOrderBy: 'id', defaultOrderDir: 'desc' },
+  environmental_impact: { endpoint: 'environmental-impact', defaultOrderBy: 'id', defaultOrderDir: 'desc' },
+  sdg: { endpoint: 'sdg', defaultOrderBy: 'sdg_confidence', defaultOrderDir: 'desc' },
+  activity: { endpoint: 'activity', defaultOrderBy: 'activity_rank', defaultOrderDir: 'asc' },
+  completeness: { endpoint: 'completeness', defaultOrderBy: 'completeness_rank', defaultOrderDir: 'asc' }
 };
 
 /**
@@ -72,7 +49,8 @@ function useMetrics(metricType: keyof typeof METRIC_CONFIGS, params: MetricsPara
     limit: params.limit || 5,
     order_by: params.order_by || config.defaultOrderBy,
     order_dir: params.order_dir || config.defaultOrderDir,
-    search: params.search || ''
+    search: params.search || '',
+    funding_status: params.funding_status || ''
   };
 
   const endpoint = `metrics/${config.endpoint}/projects?${qs.stringify(queryParams)}`;
