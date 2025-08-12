@@ -30,8 +30,7 @@ const METRIC_CONFIGS: Record<string, MetricConfig> = {
   social_impact: { endpoint: 'social-impact', defaultOrderBy: 'id', defaultOrderDir: 'desc' },
   environmental_impact: { endpoint: 'environmental-impact', defaultOrderBy: 'id', defaultOrderDir: 'desc' },
   sdg: { endpoint: 'sdg', defaultOrderBy: 'sdg_confidence', defaultOrderDir: 'desc' },
-  activity: { endpoint: 'activity', defaultOrderBy: 'activity_rank', defaultOrderDir: 'asc' },
-  completeness: { endpoint: 'completeness', defaultOrderBy: 'completeness_rank', defaultOrderDir: 'asc' }
+  activity: { endpoint: 'activity', defaultOrderBy: 'activity_rank', defaultOrderDir: 'asc' }
 };
 
 /**
@@ -86,5 +85,3 @@ export const useEnvironmentalImpactMetrics = (params?: MetricsParams) => useMetr
 export const useSdgMetrics = (params?: MetricsParams) => useMetrics('sdg', params);
 
 // export const useActivityMetrics = (params?: MetricsParams) => useMetrics('activity', params);
-
-// export const useCompletenessMetrics = (params?: MetricsParams) => useMetrics('completeness', params);

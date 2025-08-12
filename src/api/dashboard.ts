@@ -49,11 +49,6 @@ const iconMap: Record<string, any> = {
   },
   activity: {
     iconPrimary: Activity,
-    color: 'warning.darker',
-    bgcolor: 'warning.lighter'
-  },
-  completeness: {
-    iconPrimary: TickCircle,
     color: 'success.darker',
     bgcolor: 'success.lighter'
   }
@@ -65,8 +60,7 @@ const linkMap: Record<string, string> = {
   'social impact': '/metrics/social-impact',
   'environmental impact': '/metrics/environmental-impact',
   'sdg ratings': '/metrics/sdg',
-  activity: '/metrics/activity',
-  completeness: '/metrics/completeness'
+  activity: '/metrics/activity'
 };
 
 /** API endpoint **/

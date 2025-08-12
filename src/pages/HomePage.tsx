@@ -22,7 +22,6 @@ import {
   useEnvironmentalImpactMetrics,
   useSdgMetrics
   // useActivityMetrics,
-  // useCompletenessMetrics
 } from 'api/metrics';
 
 // ==============================|| HOME PAGE ||============================== //
@@ -63,13 +62,6 @@ export default function HomePage() {
   //   error: activityError,
   //   totalProjects: activityTotal
   // } = useActivityMetrics();
-
-  // const {
-  //   projectsData: completenessProjects,
-  //   isLoading: completenessLoading,
-  //   error: completenessError,
-  //   totalProjects: completenessTotal
-  // } = useCompletenessMetrics();
 
   return (
     <>
@@ -201,19 +193,6 @@ export default function HomePage() {
           metricType="activity"
           totalItems={activityTotal}
           icon={<Activity size="24px" style={{ color: '#ff5722' }} />}
-        /> */}
-
-        {/* <Divider sx={{ my: 2 }} /> */}
-
-        {/* Completeness Section */}
-        {/* <MetricsSection
-          title="Most Complete Projects"
-          projects={completenessProjects}
-          isLoading={completenessLoading}
-          error={completenessError}
-          metricType="completeness"
-          totalItems={completenessTotal}
-          icon={<TickCircle size="24px" style={{ color: '#8bc34a' }} />}
         /> */}
       </Box>
     </>

@@ -1,29 +1,15 @@
-import { useState, ChangeEvent } from 'react';
-
 /** MUI **/
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// select company-size
-const sizes = [
-  { value: '1', label: '1 - 5' },
-  { value: '2', label: '5 - 10' },
-  { value: '3', label: '10+' }
-];
-
 // ==============================|| CONTACT US - FORM ||============================== //
 
 export default function ContactForm() {
-  const [size, setSize] = useState(1);
-  const handleCompanySize = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setSize(Number(event.target?.value!));
-  };
   return (
     <Box sx={{ p: { xs: 2.5, sm: 0 } }}>
       <Grid container spacing={5} sx={{ justifyContent: 'center' }}>

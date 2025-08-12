@@ -36,7 +36,6 @@ const SocialImpactPage = Loadable(lazy(() => import('pages/metrics/SocialImpactP
 const EnvironmentalImpactPage = Loadable(lazy(() => import('pages/metrics/EnvironmentalImpactPage')));
 const SdgPage = Loadable(lazy(() => import('pages/metrics/SDGPage')));
 const ActivityPage = Loadable(lazy(() => import('pages/metrics/ActivityPage')));
-const CompletenessPage = Loadable(lazy(() => import('pages/metrics/CompletenessPage')));
 
 // Other pages
 const RoadmapPage = Loadable(lazy(() => import('pages/RoadmapPage')));
@@ -74,7 +73,6 @@ const MainRoutes = {
         { path: 'metrics/environmental-impact', element: <EnvironmentalImpactPage /> },
         { path: 'metrics/sdg', element: <SdgPage /> },
         { path: 'metrics/activity', element: <ActivityPage /> },
-        { path: 'metrics/completeness', element: <CompletenessPage /> },
 
         // Contact Us page
         { path: 'contact-us', element: <ContactUsPage /> },

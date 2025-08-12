@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import { Box, Typography, Chip, Avatar, Stack, IconButton, Tooltip, Paper } from '@mui/material';
 
 /** Icons **/
-import { Eye, Award, Tree, TrendUp, TickCircle, Activity, People } from 'iconsax-react';
+import { Eye, Award, Tree, TrendUp, Activity, People } from 'iconsax-react';
 
 /** Components **/
 import DOMPurify from 'dompurify';
@@ -21,8 +21,7 @@ const METRICS_TYPES: Record<string, string> = {
   social_impact: 'Social Impact',
   environmental_impact: 'Environmental Impact',
   sdg: 'SDG',
-  activity: 'Activity',
-  completeness: 'Completeness'
+  activity: 'Activity'
 };
 
 /**
@@ -54,8 +53,6 @@ const getMetricIcon = (type: string) => {
       return <TrendUp size="16px" />;
     case 'activity':
       return <Activity size="16px" />;
-    case 'completeness':
-      return <TickCircle size="16px" />;
     default:
       return <TrendUp size="16px" />;
   }
@@ -76,9 +73,6 @@ const getMetricColor = (type: string) => {
       return 'primary.main';
     case 'activity':
       return 'secondary.main';
-      return 'success.main';
-    case 'completeness':
-      return 'error.main';
     default:
       return 'info.main';
   }

@@ -1,5 +1,5 @@
 // assets
-import { Award, Activity, Tree, TickCircle, People, Chart1 } from 'iconsax-react';
+import { Award, Activity, Tree, People, Chart1 } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -10,7 +10,6 @@ const icons = {
   socialImpactMetrics: People,
   environmentalImpactMetrics: Tree,
   sdgMetrics: Chart1,
-  completenessMetrics: TickCircle,
   activityMetrics: Activity
 };
 
@@ -61,15 +60,6 @@ const metrics: NavItemType = {
       type: 'item',
       icon: icons.activityMetrics,
       url: '/metrics/activity',
-      target: false,
-      disabled: true
-    },
-    {
-      id: 'completeness',
-      title: 'Completeness',
-      type: 'item',
-      icon: icons.completenessMetrics,
-      url: '/metrics/completeness',
       target: false,
       disabled: true
     }

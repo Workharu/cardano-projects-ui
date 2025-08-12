@@ -5,41 +5,41 @@ import tsconfigPaths from 'vite-tsconfig-paths';
  * Vite configuration
  */
 export default defineConfig(function (_a) {
-    var mode = _a.mode;
-    var env = loadEnv(mode, process.cwd(), '');
-    var API_URL = "".concat(env.VITE_APP_BASE_NAME);
-    var PORT = 3000;
-    return {
-        server: {
-            open: false,
-            port: PORT,
-            host: true
-        },
-        preview: {
-            open: true,
-            host: true
-        },
-        define: {
-            global: 'window'
-        },
-        resolve: {
-            alias: [
-            // { find: '', replacement: path.resolve(__dirname, 'src') },
-            // {
-            //   find: /^~(.+)/,
-            //   replacement: path.join(process.cwd(), 'node_modules/$1')
-            // },
-            // {
-            //   find: /^src(.+)/,
-            //   replacement: path.join(process.cwd(), 'src/$1')
-            // }
-            // {
-            //   find: 'assets',
-            //   replacement: path.join(process.cwd(), 'src/assets')
-            // },
-            ]
-        },
-        base: API_URL,
-        plugins: [react(), tsconfigPaths()]
-    };
+  var mode = _a.mode;
+  var env = loadEnv(mode, process.cwd(), '');
+  var API_URL = ''.concat(env.VITE_APP_BASE_NAME);
+  var PORT = 3000;
+  return {
+    server: {
+      open: false,
+      port: PORT,
+      host: true
+    },
+    preview: {
+      open: true,
+      host: true
+    },
+    define: {
+      global: 'window'
+    },
+    resolve: {
+      alias: [
+        // { find: '', replacement: path.resolve(__dirname, 'src') },
+        // {
+        //   find: /^~(.+)/,
+        //   replacement: path.join(process.cwd(), 'node_modules/$1')
+        // },
+        // {
+        //   find: /^src(.+)/,
+        //   replacement: path.join(process.cwd(), 'src/$1')
+        // }
+        // {
+        //   find: 'assets',
+        //   replacement: path.join(process.cwd(), 'src/assets')
+        // },
+      ]
+    },
+    base: API_URL,
+    plugins: [react(), tsconfigPaths()]
+  };
 });

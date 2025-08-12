@@ -18,9 +18,6 @@ export interface Metrics extends ProjectsCardData {
     sdg_confidence: number;
     sdg_rank: number;
   };
-  completeness?: {
-    is_complete: boolean;
-  };
   activity?: {
     activity_rank: number;
   };
