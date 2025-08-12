@@ -2,7 +2,7 @@
 import Button, { ButtonProps } from '@mui/material/Button';
 import CardMedia from '@mui/material/CardMedia';
 import Chip, { ChipProps } from '@mui/material/Chip';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 

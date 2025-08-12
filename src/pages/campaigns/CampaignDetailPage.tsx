@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router';
 
 /** MUI **/
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { ArrowRight2 } from 'iconsax-react';

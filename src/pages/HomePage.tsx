@@ -1,5 +1,5 @@
 /** MUI **/
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import { Box, Divider, Typography } from '@mui/material';
 
 /** Icons **/

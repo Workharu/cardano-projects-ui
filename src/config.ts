@@ -32,7 +32,7 @@ export enum NavActionType {
 
 // ==============================|| THEME CONFIG ||============================== //
 const config: DefaultConfigProps = {
-  fontFamily: `Inter var`,
+  fontFamily: `'Quicksand', sans-serif`,
   menuOrientation: MenuOrientation.VERTICAL,
   menuCaption: true,
   miniDrawer: false,

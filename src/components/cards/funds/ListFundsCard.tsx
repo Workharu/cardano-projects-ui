@@ -2,7 +2,7 @@
 import { Link } from 'react-router';
 
 /** MUI **/
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 /** MUI **/
 import { useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';

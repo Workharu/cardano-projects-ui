@@ -35,6 +35,8 @@ const UniquenessPage = Loadable(lazy(() => import('pages/metrics/UniquenessPage'
 const SocialImpactPage = Loadable(lazy(() => import('pages/metrics/SocialImpactPage')));
 const EnvironmentalImpactPage = Loadable(lazy(() => import('pages/metrics/EnvironmentalImpactPage')));
 const SdgPage = Loadable(lazy(() => import('pages/metrics/SDGPage')));
+const ActivityPage = Loadable(lazy(() => import('pages/metrics/ActivityPage')));
+const CompletenessPage = Loadable(lazy(() => import('pages/metrics/CompletenessPage')));
 
 // Other pages
 const RoadmapPage = Loadable(lazy(() => import('pages/RoadmapPage')));
@@ -51,82 +53,36 @@ const MainRoutes = {
       // element: <SimpleLayout layout={SimpleLayoutType.SIMPLE} />,
       element: <DashboardLayout />,
       children: [
-        {
-          path: '',
-          element: <HomePage />
-        },
+        { path: '', element: <HomePage /> },
 
         // Funds routes
-        {
-          path: 'funds',
-          element: <ListFundsPage />
-        },
-        {
-          path: 'funds/:fundId',
-          element: <FundsDetailPage />
-        },
+        { path: 'funds', element: <ListFundsPage /> },
+        { path: 'funds/:fundId', element: <FundsDetailPage /> },
 
         // Campaigns routes
-        {
-          path: 'campaigns',
-          element: <ListCampaignsPage />
-        },
-        {
-          path: 'campaigns/:campaignId',
-          element: <CampaignDetailPage />
-        },
-        {
-          path: 'campaigns/:campaignId/projects',
-          element: <ListProjectsByCampaignPage />
-        },
+        { path: 'campaigns', element: <ListCampaignsPage /> },
+        { path: 'campaigns/:campaignId', element: <CampaignDetailPage /> },
+        { path: 'campaigns/:campaignId/projects', element: <ListProjectsByCampaignPage /> },
 
         // Projects routes
-        {
-          path: 'projects',
-          element: <ListProjectsPage />
-        },
-        {
-          path: 'projects/:projectId',
-          element: <ProjectDetailPage />
-        },
+        { path: 'projects', element: <ListProjectsPage /> },
+        { path: 'projects/:projectId', element: <ProjectDetailPage /> },
 
         // Metrics routes
-        {
-          path: 'metrics/uniqueness',
-          element: <UniquenessPage />
-        },
-        {
-          path: 'metrics/social-impact',
-          element: <SocialImpactPage />
-        },
-        {
-          path: 'metrics/environmental-impact',
-          element: <EnvironmentalImpactPage />
-        },
-        {
-          path: 'metrics/sdg',
-          element: <SdgPage />
-        },
+        { path: 'metrics/uniqueness', element: <UniquenessPage /> },
+        { path: 'metrics/social-impact', element: <SocialImpactPage /> },
+        { path: 'metrics/environmental-impact', element: <EnvironmentalImpactPage /> },
+        { path: 'metrics/sdg', element: <SdgPage /> },
+        { path: 'metrics/activity', element: <ActivityPage /> },
+        { path: 'metrics/completeness', element: <CompletenessPage /> },
 
         // Contact Us page
-        {
-          path: 'contact-us',
-          element: <ContactUsPage />
-        },
-        {
-          path: 'roadmap',
-          element: <RoadmapPage />
-        },
-        {
-          path: 'whiteboard',
-          element: <WhiteboardPage />
-        },
+        { path: 'contact-us', element: <ContactUsPage /> },
+        { path: 'roadmap', element: <RoadmapPage /> },
+        { path: 'whiteboard', element: <WhiteboardPage /> },
 
         // Catch-all route for 404 errors
-        {
-          path: '*',
-          element: <ErrorPage />
-        }
+        { path: '*', element: <ErrorPage /> }
       ]
     },
 
@@ -135,30 +91,12 @@ const MainRoutes = {
       path: '/maintenance',
       element: <PagesLayout />,
       children: [
-        {
-          path: '404',
-          element: <ErrorPage />
-        },
-        {
-          path: '500',
-          element: <MaintenanceError500 />
-        },
-        {
-          path: 'under-construction',
-          element: <MaintenanceUnderConstruction />
-        },
-        {
-          path: 'under-construction2',
-          element: <MaintenanceUnderConstruction2 />
-        },
-        {
-          path: 'coming-soon',
-          element: <MaintenanceComingSoon />
-        },
-        {
-          path: 'coming-soon-2',
-          element: <MaintenanceComingSoon2 />
-        }
+        { path: '404', element: <ErrorPage /> },
+        { path: '500', element: <MaintenanceError500 /> },
+        { path: 'under-construction', element: <MaintenanceUnderConstruction /> },
+        { path: 'under-construction2', element: <MaintenanceUnderConstruction2 /> },
+        { path: 'coming-soon', element: <MaintenanceComingSoon /> },
+        { path: 'coming-soon-2', element: <MaintenanceComingSoon2 /> }
       ]
     }
   ]

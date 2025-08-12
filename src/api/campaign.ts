@@ -17,13 +17,8 @@ const endpoints = {
   // Individual campaign endpoint
   campaign: (campaignId: any) => `${endpoints.base}/${campaignId}`,
   // Multiple campaigns
-  campaigns: ({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: UseCampaignParams) =>
-    `campaigns/${campaignId}/projects?${qs.stringify({
-      page,
-      limit,
-      order_by,
-      order_dir
-    })}`,
+  campaigns: ({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc', search, funding_status }: UseCampaignParams) =>
+    `campaigns/${campaignId}/projects?${qs.stringify({ page, limit, order_by, order_dir, search, funding_status })}`,
   fund_campaigns: (fundId: any) => `${endpoints.base}/${fundId}/campaigns`
 };
 
@@ -54,10 +49,20 @@ interface UseCampaignParams {
   limit?: number;
   order_by?: SortableFields;
   order_dir?: SortDirection;
+  search?: string;
+  funding_status?: string;
 }
 
-export function useCampaignProjects({ campaignId, page = 1, limit = 10, order_by = 'id', order_dir = 'asc' }: UseCampaignParams) {
-  const key = endpoints.campaigns({ campaignId, page, limit, order_by, order_dir });
+export function useCampaignProjects({
+  campaignId,
+  page = 1,
+  limit = 10,
+  order_by = 'id',
+  order_dir = 'asc',
+  search,
+  funding_status
+}: UseCampaignParams) {
+  const key = endpoints.campaigns({ campaignId, page, limit, order_by, order_dir, search, funding_status });
 
   const { data, isLoading, error, mutate } = useSWR(key, fetcher, {
     revalidateIfStale: true,
@@ -86,10 +91,7 @@ export function useCampaignProjects({ campaignId, page = 1, limit = 10, order_by
 }
 
 export function useCampaignsPerFundData(fundId: any, sortField?: string, sortDirection: SortDirection = 'asc') {
-  const params = {
-    ...(sortField && { order_by: sortField }),
-    order_dir: sortDirection
-  };
+  const params = { ...(sortField && { order_by: sortField }), order_dir: sortDirection };
 
   const { data, isLoading, error, mutate } = useSWR([endpoints.fund_campaigns(fundId), { params }], fetcher, {
     revalidateIfStale: false,

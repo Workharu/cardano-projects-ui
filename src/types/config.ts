@@ -1,11 +1,7 @@
 import { MenuOrientation, ThemeMode } from 'config';
 
-export type FontFamily =
-  | `Inter var`
-  | `'Inter', sans-serif`
-  | `'Poppins', sans-serif`
-  | `'Roboto', sans-serif`
-  | `'Public Sans', sans-serif`;
+export type FontFamily = `'Quicksand', sans-serif` | `'Dosis', sans-serif` | `'Advent Pro', sans-serif`;
+
 export type PresetColor = 'default' | 'theme1' | 'theme2' | 'theme3' | 'theme4' | 'theme5' | 'theme6' | 'theme7' | 'theme8';
 
 // ==============================|| TYPES - CONFIG ||============================== //
@@ -14,10 +10,9 @@ export type DefaultConfigProps = {
   /**
    * The props used for the theme font-style.
    * We provide static below options -
-   * `'Inter', sans-serif`
-   * `'Poppins', sans-serif`
-   * `'Roboto', sans-serif`
-   * `'Public Sans', sans-serif` (default)
+   * `'Quicksand', sans-serif`
+   * `'Dosis', sans-serif`
+   * `'Advent Pro', sans-serif`
    */
   fontFamily: FontFamily;
 

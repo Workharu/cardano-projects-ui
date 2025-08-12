@@ -94,16 +94,6 @@ export default function ListProjectsCard({ project, fund, campaign, showFullDesc
               Project #{id}
             </Typography>
 
-            {requested_fund && (
-              <Chip
-                size="small"
-                icon={<MoneySend size="14px" />}
-                label={`${requested_fund.toLocaleString()} ₳`}
-                color="success"
-                sx={{ borderRadius: 1 }}
-              />
-            )}
-
             {project_status && (
               <Chip
                 size="small"
@@ -134,8 +124,8 @@ export default function ListProjectsCard({ project, fund, campaign, showFullDesc
 
               <Typography variant="body2" color="text.secondary" display="flex" alignItems="center">
                 <Calendar1 size="14px" style={{ marginRight: 4 }} />
-                {formattedDate}
-                {updated_at && ` (Updated ${updatedDate})`}
+                {/* {formattedDate} */}
+                {updated_at && ` Updated ${updatedDate}`}
               </Typography>
 
               {(country || continent) && (

@@ -1,9 +1,8 @@
 import { ReactNode, useMemo } from 'react';
 
 /** MUI **/
-import { createTheme, ThemeOptions, ThemeProvider, Theme, TypographyVariantsOptions } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import StyledEngineProvider from '@mui/material/StyledEngineProvider';
+import { createTheme, ThemeOptions, ThemeProvider, Theme, TypographyVariantsOptions, StyledEngineProvider } from '@mui/material/styles';
 
 /** Components **/
 import Palette from './palette';
