@@ -33,7 +33,7 @@ const FUNDING_STATUS_OPTIONS = [
   { value: 'NotFunded', label: 'Not Funded' }
 ];
 
-// ==============================|| HOME PAGE ||============================== //
+// ==============================|| PROJECTS PAGE ||============================== //
 
 export default function ListProjectsPage() {
   const filters = useListFilters({

@@ -16,6 +16,7 @@ interface MetricsParams {
   order_dir?: SortDirection;
   search?: string;
   funding_status?: string;
+  fund_ids?: number[];
 }
 
 interface MetricConfig {
@@ -49,7 +50,8 @@ function useMetrics(metricType: keyof typeof METRIC_CONFIGS, params: MetricsPara
     order_by: params.order_by || config.defaultOrderBy,
     order_dir: params.order_dir || config.defaultOrderDir,
     search: params.search || '',
-    funding_status: params.funding_status || ''
+    funding_status: params.funding_status || '',
+    fund_ids: params.fund_ids || []
   };
 
   const endpoint = `metrics/${config.endpoint}/projects?${qs.stringify(queryParams)}`;
