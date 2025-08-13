@@ -113,7 +113,7 @@ export default function FundsDetailPage() {
       <Grid container spacing={GRID_COMMON_SPACING}>
         {campaignsData.map((data, index) => (
           <Grid key={index} size={{ xs: 12, sm: 8, md: 4 }}>
-            <ListCamaignsPerFundCard name={data.name} total={data.total} link={data.link} />
+            <ListCamaignsPerFundCard name={data.name} total={data.total ? data.total : 0} link={data.link ? data.link : '#'} />
           </Grid>
         ))}
       </Grid>
