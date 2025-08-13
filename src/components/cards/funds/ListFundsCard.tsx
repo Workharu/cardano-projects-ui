@@ -11,12 +11,11 @@ import MainCard from 'components/MainCard';
 
 interface Props {
   name: string;
-  updated_at: Date;
   total: number;
   link: string;
 }
 
-export default function ListFundsCard({ name, updated_at, total, link }: Props) {
+export default function ListFundsCard({ name, total, link }: Props) {
   return (
     <Link to={link} style={{ textDecoration: 'none', color: 'inherit' }}>
       <MainCard>

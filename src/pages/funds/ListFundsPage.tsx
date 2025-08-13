@@ -100,7 +100,7 @@ export default function ListFundsPage() {
       <Grid container spacing={GRID_COMMON_SPACING}>
         {fundsData.map((data, index) => (
           <Grid key={index} size={{ xs: 12, sm: 8, md: 4 }}>
-            <ListFundsCard name={data.name} updated_at={data.updated_at} total={data.total} link={data.link} />
+            <ListFundsCard name={data.name} total={data.total!} link={data.link!} />
           </Grid>
         ))}
       </Grid>
