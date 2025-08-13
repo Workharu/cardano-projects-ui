@@ -1,8 +1,8 @@
 export interface FundsCardData {
-  id: string;
+  id: number;
   name: string;
-  created_at: Date;
-  updated_at: Date;
-  total: number;
-  link: string;
+  created_at?: Date;
+  updated_at?: Date;
+  total?: number;
+  link?: string;
 }
