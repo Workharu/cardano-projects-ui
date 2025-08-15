@@ -80,10 +80,10 @@ export default function Footer({ isFull }: showProps) {
                 <Stack sx={{ gap: 3 }}>
                   <Typography variant="h5">Help & Support</Typography>
                   <Stack sx={{ gap: { xs: 1.5, md: 2.5 } }}>
-                    <FooterLink href="/whiteboard" underline="none">
-                      Whiteboard
+                    <FooterLink href="https://docs.cardanoprojects.com" underline="none">
+                      Docs
                     </FooterLink>
-                    <FooterLink href="/roadmap" underline="none">
+                    <FooterLink href="https://docs.cardanoprojects.com/how.html" underline="none">
                       RoadMap
                     </FooterLink>
                     <FooterLink href="/contact-us" underline="none">
