@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import { Box, Divider, Typography } from '@mui/material';
 
 /** Icons **/
-import { Award, Tree, Activity, TickCircle, Chart1, People } from 'iconsax-react';
+import { Award, Tree, Activity, Chart1, People } from 'iconsax-react';
 
 /** Components **/
 import MetricsCard from 'components/cards/home/MetricsCard';

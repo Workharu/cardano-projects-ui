@@ -8,7 +8,7 @@ import { fetcher } from 'utils/axios';
 import { SortDirection } from '@mui/material';
 import { FundsCardData } from 'types/funds';
 
-const endpoints = {
+const endpoints: any = {
   key: 'funds',
   fund_campaigns: (fundId: any) => `${endpoints.key}/${fundId}/campaigns`
 };
@@ -35,9 +35,9 @@ export function useFundsData(sortField?: string, sortDirection: SortDirection = 
     return fundsData.map((item: any) => ({
       id: item.id,
       name: item.name,
-      created_at: item.created_at,
-      updated_at: item.updated_at,
-      total: item.total,
+      created_at: item.created_at ?? undefined,
+      updated_at: item.updated_at ?? undefined,
+      total: item.total ?? undefined,
       link: `/funds/${item.id}`
     }));
   }, [data]);

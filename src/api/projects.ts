@@ -9,7 +9,7 @@ import { fetcher } from 'utils/axios';
 import { ProjectsCardData, ProjectData } from 'types/projects';
 import { SortableFields, SortDirection } from 'types/sort';
 
-type FundingStatus = 'all' | 'Funded' | 'NotFunded';
+export type FundingStatus = 'all' | 'Funded' | 'NotFunded';
 
 interface ProjectsParams {
   page?: number;
@@ -18,6 +18,7 @@ interface ProjectsParams {
   order_dir?: SortDirection;
   search?: string;
   funding_status?: FundingStatus;
+  fund_ids?: number[];
 }
 
 /** API endpoint configuration **/
@@ -33,7 +34,8 @@ const endpoints = {
       order_by: params.order_by || 'id',
       order_dir: params.order_dir || 'desc',
       search: params.search,
-      funding_status: params.funding_status
+      funding_status: params.funding_status,
+      fund_ids: params.fund_ids
     })}`
 };
 
